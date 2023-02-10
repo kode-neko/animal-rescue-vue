@@ -1,11 +1,13 @@
 <template>
-  <v-card>
-    <v-layout>
+
+    <v-app>
       <v-app-bar
         color="primary"
-        prominent
+        density="compact"
       >
-        <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <template v-slot:prepend>
+          <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        </template>
         <v-toolbar-title>My files</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn variant="text" icon="mdi-magnify"></v-btn>
@@ -15,24 +17,51 @@
 
       <v-navigation-drawer
         v-model="drawer"
-        location="bottom"
+        location="left"
         temporary
       >
         <v-list :items="items"></v-list>
       </v-navigation-drawer>
-
-      <v-main>
-        <v-card-text>
+      <app-main :style="{paddingTop: '60px'}">
           <router-view></router-view>
-        </v-card-text>
-      </v-main>
-    </v-layout>
-  </v-card>
+        </app-main>
+        
+    </v-app>
+
+
+
 </template>
 
 <script>
 export default {
+  data: () => ({
+      drawer: false,
+      group: null,
+      items: [
+        {
+          title: 'Foo',
+          value: 'foo',
+        },
+        {
+          title: 'Bar',
+          value: 'bar',
+        },
+        {
+          title: 'Fizz',
+          value: 'fizz',
+        },
+        {
+          title: 'Buzz',
+          value: 'buzz',
+        },
+      ],
+    }),
 
+    watch: {
+      group () {
+        this.drawer = false
+      },
+    },
 }
 </script>
 

@@ -1,5 +1,9 @@
 <template>
-  Master
+  <v-container>
+    <v-row>
+      <v-col>Master</v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
