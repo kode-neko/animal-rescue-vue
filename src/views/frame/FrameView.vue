@@ -1,70 +1,80 @@
 <template>
 
     <v-app>
-      <v-app-bar
-        color="primary"
-        density="compact"
-      >
-        <template v-slot:prepend>
-          <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        </template>
-        <v-toolbar-title>My files</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-btn variant="text" icon="mdi-magnify"></v-btn>
-        <v-btn variant="text" icon="mdi-filter"></v-btn>
-        <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
-      </v-app-bar>
-
-      <v-navigation-drawer
-        v-model="drawer"
-        location="left"
-        temporary
-      >
-        <v-list :items="items"></v-list>
-      </v-navigation-drawer>
+      <MainBar 
+        theme="dark" 
+        lang="es" 
+        :drawer="drawer"
+        @changeDrawer="handleClickMenu"
+        @changeTheme="handleChange"
+        @changeLang="handleChange"
+       />
+      <MainBarDrawer
+        theme="dark" 
+        lang="es" 
+        :drawer="drawer"
+        @changeTheme="handleChange"
+        @changeLang="handleChange"
+        @changeDrawer="(val) => drawer = val"
+      />
       <app-main :style="{paddingTop: '60px'}">
-          <router-view></router-view>
-        </app-main>
-        
+        <router-view></router-view>
+      </app-main>
     </v-app>
-
-
 
 </template>
 
 <script>
-export default {
-  data: () => ({
-      drawer: false,
-      group: null,
-      items: [
-        {
-          title: 'Foo',
-          value: 'foo',
-        },
-        {
-          title: 'Bar',
-          value: 'bar',
-        },
-        {
-          title: 'Fizz',
-          value: 'fizz',
-        },
-        {
-          title: 'Buzz',
-          value: 'buzz',
-        },
-      ],
-    }),
+import MainBar from '../../components/MainBar.vue';
+import MainBarDrawer from '../../components/MainBarDrawer.vue';
 
-    watch: {
-      group () {
-        this.drawer = false
-      },
+export default {
+  components: {MainBar, MainBarDrawer},
+  data: () => ({
+    drawer: false,
+    lang: 'es',
+    theme: 'dark',
+    methods: {
+      changeData() {
+        this.data = this.data === 'dark' ? 'light' : 'dark'
+      }
     },
+  }),
+  methods: {
+    handleClickMenu(val) {
+      this.drawer = val;
+    },
+    handleChange(val) {
+      console.log('FV: ', val)
+    }
+  }
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+  .iconTitle {
+    margin-right: 10px;
+  }
+  .contFlex {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .contSw {
+    margin: 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 10px;
+    .sw {
+      flex: none;
+    }
+  }
+  .contLang{
+    margin: 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 10px;
+  }
 </style>
