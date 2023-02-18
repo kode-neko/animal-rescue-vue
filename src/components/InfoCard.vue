@@ -39,14 +39,7 @@
       </v-row>
     </v-card-text>
     <v-card-actions class="d-flex justify-end mr-4 mb-2">
-      <v-btn 
-        variant="outlined"
-        prepend-icon="mdi-delete"
-        color="primary"
-        class="ml-3"
-      >
-        Delete
-      </v-btn>
+      <DeleteDialog />
       <v-btn 
         @click="$router.push('/edit/333')"
         variant="outlined"
@@ -61,9 +54,11 @@
 </template>
 
 <script>
-import { attrAnimalCol01, attrAnimalCol02 } from '../constants.js'
+import { attrAnimalCol01, attrAnimalCol02 } from '../constants.js';
+import DeleteDialog from './dialog/DeleteDialog.vue';
 
 export default {
+  components: {DeleteDialog},
   data() {
     const imgUrl = new URL(`../assets/cat.png`, import.meta.url).href;
     return {

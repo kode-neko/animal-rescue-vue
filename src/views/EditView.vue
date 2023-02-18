@@ -16,11 +16,12 @@ import {
   Size,
   SizeFur
 } from '../constants';
+import HeaderSubpage from '../components/HeaderSubpage.vue';
 import AnimalForm from '../components/AnimalForm.vue';
 import {useRoute} from 'vue-router';
 
 export default {
-  components: { AnimalForm },
+  components: { HeaderSubpage, AnimalForm },
   data() {
     return {
       animal: {
