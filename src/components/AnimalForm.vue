@@ -4,7 +4,7 @@
     <v-row>
       <v-col cols="12">
         <v-text-field
-          v-model="animal.name"
+          v-model="animalForm.name"
           label="name"
           required
         ></v-text-field>
@@ -13,7 +13,7 @@
 
     <v-row>
       <v-col cols="6">
-        <v-radio-group v-model="animal.sex">
+        <v-radio-group v-model="animalForm.sex">
           <template v-slot:label>
             <div>gender</div>
           </template>
@@ -27,7 +27,7 @@
         </v-radio-group>
       </v-col>
       <v-col cols="6">
-        <v-radio-group v-model="animal.species">
+        <v-radio-group v-model="animalForm.species">
           <template v-slot:label>
             <div>species</div>
           </template>
@@ -44,7 +44,7 @@
     <v-row>
       <v-col cols="12">
         <v-text-field
-          v-model="animal.breed"
+          v-model="animalForm.breed"
           label="breed"
           required
         ></v-text-field>
@@ -53,11 +53,11 @@
 
     <v-row>
       <v-col cols="6">
-        <VueDatePicker v-model="animal.bday" />
+        <VueDatePicker v-model="animalForm.bday" />
       </v-col>
       <v-col cols="6">
         <v-select
-          v-model="animal.color"
+          v-model="animalForm.color"
           :items="Object.values(ColorFur)"
           :item-value="ColorFur.BLACK"
           label="color"
@@ -68,7 +68,7 @@
       </v-col>
       <v-col cols="6">
         <v-select
-          v-model="animal.eyes"
+          v-model="animalForm.eyes"
           :items="Object.values(ColorEyes)"
           :item-value="ColorEyes.BLUE"
           label="eyes"
@@ -79,7 +79,7 @@
       </v-col>
       <v-col cols="6">
         <v-select
-          v-model="animal.size"
+          v-model="animalForm.size"
           :items="Object.values(Size)"
           :item-value="Size.LARGE"
           label="size"
@@ -90,7 +90,7 @@
       </v-col>
       <v-col cols="6">
         <v-select
-          v-model="animal.sizeFur"
+          v-model="animalForm.sizeFur"
           :items="Object.values(SizeFur)"
           :item-value="SizeFur.LARGE"
           label="fur"
@@ -106,7 +106,7 @@
         <v-textarea
           variant="filled"
           label="desc"
-          v-model="animal.desc"
+          v-model="animalForm.desc"
         ></v-textarea>
       </v-col>
     </v-row>
@@ -140,6 +140,9 @@ import '@vuepic/vue-datepicker/dist/main.css';
 export default {
 
   components: {VueDatePicker},
+  props: {
+    animal: Object,
+  },
   data() {
     return {
       Species,
@@ -148,37 +151,10 @@ export default {
       ColorEyes,
       Size,
       SizeFur,
-      animal: {
-        name: 'patata',
-        bday: new Date,
-        sex: Sex.MALE,
-        desc: 'patata',
-        breed: 'patata',
-        color: ColorFur.BLACK,
-        eyes: ColorEyes.BLUE,
-        species: Species.CAT,
-        size: Size.LARGE,
-        sizeFur: SizeFur.LARGE
-      }
+      animalForm: this.animal,
     }
   }
 }
-
-/*
-interface Animal {
-  id?: string;
-  name: string;
-  bday?: Date;
-  sex: Sex;
-  desc: string;
-  breed: string;
-  color: ColorFur;
-  eyes: ColorEyes;
-  species: Species;
-  size: Size;
-  sizeFur: SizeFur;
-}
-*/
 </script>
 
 <style>

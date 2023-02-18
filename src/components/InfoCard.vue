@@ -48,7 +48,7 @@
         Delete
       </v-btn>
       <v-btn 
-        @click="$router.push('/create')"
+        @click="$router.push('/edit/333')"
         variant="outlined"
         prepend-icon="mdi-pencil"
         color="primary"

@@ -24,7 +24,7 @@ const router = createRouter({
           component: CreateView
         },
         {
-          path: '/edit:id',
+          path: '/edit/:id',
           name: '/edit',
           component: EditView
         }
