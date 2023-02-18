@@ -50,11 +50,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .main {
-    max-width: 992px;
-    margin: 0 auto;
-    margin-top: 60px;
-    padding: 0 24px;
-  }
+.main {
+  width: 992px;
+  margin: 0 auto;
+  margin-top: 60px;
+  padding: 0 24px;
+}
 
 </style>

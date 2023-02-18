@@ -1,10 +1,12 @@
 <template>
-  Edit
+  <AnimalForm />
 </template>
 
 <script>
-export default {
+import AnimalForm from '../components/AnimalForm.vue';
 
+export default {
+  components: {AnimalForm}
 }
 </script>
 

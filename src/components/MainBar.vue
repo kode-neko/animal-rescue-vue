@@ -10,7 +10,7 @@
     </template>
     <template v-slot:append>
       <div class="d-none d-md-flex contFlex">
-        <v-btn variant="text" icon="mdi-plus-circle"></v-btn>
+        <v-btn variant="text" icon="mdi-plus-circle" @click="$router.push('/create')"></v-btn>
         <v-btn variant="text" icon="mdi-share-variant"></v-btn>
         <SwitchTheme :theme="theme" @change="(newTheme) => $emit('changeTheme', newTheme)"/>
         <SelectLang :lang="lang" @change="(newLang) => $emit('changeLang', newLang)"/>
