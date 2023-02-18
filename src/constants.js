@@ -1,6 +1,9 @@
 const title = 'KN Animal Rescue';
 const titleShort = 'KN AR';
 
+const attrAnimalCol01 = ['bday', 'spicies', 'breed', 'colorFur'];
+const attrAnimalCol02 = ['eyes', 'size', 'sizeFur'];
+
 const socialTwitter = {
   name: 'Twitter',
   url: 'https://twitter.com/KodenekoFront',
@@ -25,4 +28,6 @@ export {
   titleShort,
   socialList,
   limitListRest,
+  attrAnimalCol01,
+  attrAnimalCol02
 };

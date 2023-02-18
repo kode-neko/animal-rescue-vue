@@ -1,27 +1,25 @@
 <template>
-
-    <v-app>
-      <MainBar 
-        theme="dark" 
-        lang="es" 
-        :drawer="drawer"
-        @changeDrawer="handleClickMenu"
-        @changeTheme="handleChange"
-        @changeLang="handleChange"
-       />
-      <MainBarDrawer
-        theme="dark" 
-        lang="es" 
-        :drawer="drawer"
-        @changeTheme="handleChange"
-        @changeLang="handleChange"
-        @changeDrawer="(val) => drawer = val"
+  <v-app>
+    <MainBar 
+      theme="dark" 
+      lang="es" 
+      :drawer="drawer"
+      @changeDrawer="handleClickMenu"
+      @changeTheme="handleChange"
+      @changeLang="handleChange"
       />
-      <app-main :style="{paddingTop: '60px'}">
-        <router-view></router-view>
-      </app-main>
-    </v-app>
-
+    <MainBarDrawer
+      theme="dark" 
+      lang="es" 
+      :drawer="drawer"
+      @changeTheme="handleChange"
+      @changeLang="handleChange"
+      @changeDrawer="(val) => drawer = val"
+    />
+    <v-main class="pt-12 main">
+      <router-view></router-view>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
@@ -52,29 +50,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .iconTitle {
-    margin-right: 10px;
+  .main {
+    max-width: 992px;
+    margin: 0 auto;
+    margin-top: 60px;
+    padding: 0 24px;
   }
-  .contFlex {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .contSw {
-    margin: 0 8px;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    gap: 10px;
-    .sw {
-      flex: none;
-    }
-  }
-  .contLang{
-    margin: 0 8px;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    gap: 10px;
-  }
+
 </style>
