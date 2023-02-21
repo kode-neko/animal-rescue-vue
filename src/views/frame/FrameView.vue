@@ -27,24 +27,21 @@ import MainBar from '../../components/MainBar.vue';
 import MainBarDrawer from '../../components/MainBarDrawer.vue';
 
 export default {
-  components: {MainBar, MainBarDrawer},
-  data: () => ({
-    drawer: false,
-    lang: 'es',
-    theme: 'dark',
-    methods: {
-      changeData() {
-        this.data = this.data === 'dark' ? 'light' : 'dark'
-      }
-    },
-  }),
+  components: { MainBar, MainBarDrawer },
+  data() {
+    return {
+      drawer: false,
+      lang: 'es',
+      theme: 'dark',
+    }
+  },
   methods: {
     handleClickMenu(val) {
       this.drawer = val;
     },
     handleChange(val) {
-      console.log('FV: ', val)
-    }
+      console.log('FV: ', val);
+    },
   }
 }
 </script>

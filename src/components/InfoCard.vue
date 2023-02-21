@@ -39,7 +39,15 @@
       </v-row>
     </v-card-text>
     <v-card-actions class="d-flex justify-end mr-4 mb-2">
-      <DeleteDialog />
+      <v-btn 
+        @click="$emit('delete', animal)"
+        variant="outlined"
+        prepend-icon="mdi-delete"
+        color="primary"
+        class="ml-3"
+      >
+        delete
+      </v-btn>
       <v-btn 
         @click="$router.push('/edit/333')"
         variant="outlined"
@@ -47,7 +55,7 @@
         color="primary"
         class="ml-3"
       >
-        Edit
+        edit
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -59,6 +67,9 @@ import DeleteDialog from './dialog/DeleteDialog.vue';
 
 export default {
   components: {DeleteDialog},
+  props: {
+    animal: Object,
+  },
   data() {
     const imgUrl = new URL(`../assets/cat.png`, import.meta.url).href;
     return {
@@ -66,7 +77,8 @@ export default {
       attrAnimalCol02,
       avatar: imgUrl,
     }
-  }
+  },
+  emits: ['delete']
 }
 </script>
 

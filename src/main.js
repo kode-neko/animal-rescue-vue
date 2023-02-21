@@ -25,11 +25,14 @@ import router from './router'
 import App from './App.vue'
 import './assets/main.css'
 
+// SnackBar Queue
+import Notifications from '@kyvg/vue3-notification'
 
 const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
 app.use(vuetify)
+app.use(Notifications)
 app.use(I18NextVue, {i18next: i18n})
 app.mount("#app");

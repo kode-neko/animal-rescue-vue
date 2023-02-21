@@ -12,6 +12,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@kyvg/vue3-notification": "^2.9.0",
     "@mdi/font": "^7.1.96",
     "@vuepic/vue-datepicker": "^4.0.1",
     "i18next": "^22.4.9",
