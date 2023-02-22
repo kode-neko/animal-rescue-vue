@@ -3,13 +3,13 @@
     <template v-slot:title>
       <v-avatar class="ml-3">
         <v-img
-          :src="avatar"
+          :src="getAvatar(animal.species)"
           alt="avatar"
         ></v-img>
       </v-avatar>
-      <v-icon v-if="false" class="gender female ml-3" icon="mdi-gender-female"></v-icon>
-      <v-icon v-if="true" class="gender male ml-3" icon="mdi-gender-male"></v-icon>
-      <span>Eladio</span>
+      <v-icon v-if="animal.sex === 'female'" class="gender female ml-3" icon="mdi-gender-female"></v-icon>
+      <v-icon v-if="animal.sex === 'male'" class="gender male ml-3" icon="mdi-gender-male"></v-icon>
+      <span>{{ animal.name }}</span>
     </template>
     <v-card-text>
       <v-row>
@@ -19,7 +19,7 @@
               v-for="attr in attrAnimalCol01"
               :key="attr"
               :title="attr"
-              :subtitle="attr"
+              :subtitle="parseAttr(attr, animal[attr])"
             ></v-list-item>
           </v-list>
         </v-col>
@@ -29,7 +29,7 @@
               v-for="attr in attrAnimalCol02"
               :key="attr"
               :title="attr"
-              :subtitle="attr"
+              :subtitle="parseAttr(attr, animal[attr])"
             ></v-list-item>
           </v-list>
         </v-col>
@@ -64,6 +64,7 @@
 <script>
 import { attrAnimalCol01, attrAnimalCol02 } from '../constants.js';
 import DeleteDialog from './dialog/DeleteDialog.vue';
+import * as dayjs from 'dayjs'
 
 export default {
   components: {DeleteDialog},
@@ -76,6 +77,20 @@ export default {
       attrAnimalCol01,
       attrAnimalCol02,
       avatar: imgUrl,
+    }
+  },
+  methods: {
+    getAvatar(species) {
+      return new URL(`../assets/${species}.png`, import.meta.url).href;
+    },
+    parseAttr(attr, val) {
+      if('bday' === attr)
+        return this.formatDate(val);
+      else
+        return val;
+    },
+    formatDate(bday) {
+      dayjs(bday).format('DD/MM/YYYY');
     }
   },
   emits: ['delete']

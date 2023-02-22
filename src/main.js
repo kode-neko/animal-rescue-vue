@@ -19,7 +19,7 @@ const vuetify = createVuetify({
 // Router - App - css
 import router from './router'
 import App from './App.vue'
-import './assets/main.css'
+import './assets/main.scss'
 
 // Notifications
 import Notifications from '@kyvg/vue3-notification'

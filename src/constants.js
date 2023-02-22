@@ -8,7 +8,7 @@ const {
 } = import.meta.env;
 const urlApi = `${API_PROTOCOL}${SERVER_PORT}:${SERVER_URL}/`
 
-const attrAnimalCol01 = ['bday', 'spicies', 'breed', 'colorFur'];
+const attrAnimalCol01 = ['bday', 'species', 'breed', 'colorFur'];
 const attrAnimalCol02 = ['eyes', 'size', 'sizeFur'];
 
 const Species = {

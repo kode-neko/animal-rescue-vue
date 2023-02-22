@@ -17,8 +17,12 @@
       class="d-flex flex-column my-10" 
       :style="{gap: '18px'}"
     >
-      <InfoCard :animal="animal" @delete="handleDeleteBtn" />
-      <InfoCard :animal="animal" @delete="handleDeleteBtn" />
+      <InfoCard
+        v-for="animal in animalList"
+        v-bind:key="animal.id"
+        :animal="animal"
+        @delete="handleDeleteBtn"
+      />
     </v-row>
     <DeleteDialog
       :isOpen="isOpen"
@@ -32,45 +36,36 @@
 <script>
 import InfoCard from '../components/InfoCard.vue';
 import { notify } from "@kyvg/vue3-notification";
-import { 
-  Sex, 
-  ColorFur, 
-  ColorEyes, 
-  Species, 
-  Size, 
-  SizeFur 
-} from '../constants'
 import DeleteDialog from '../components/dialog/DeleteDialog.vue';
+import { getAnimalList } from '../api/animal';
 
 export default {
   components: { InfoCard, DeleteDialog },
   data() {
     return {
-      animal: {
-        id: 333,
-        name: '',
-        bday: new Date,
-        sex: Sex.MALE,
-        desc: '',
-        breed: '',
-        color: ColorFur.BLACK,
-        eyes: ColorEyes.BLUE,
-        species: Species.CAT,
-        size: Size.LARGE,
-        sizeFur: SizeFur.LARGE
-      },
+      animalList: [],
+      offset: 0,
+      search: '',
+      limit: 5,
       isOpen: false
     }
   },
+  mounted() {
+    getAnimalList(this.offset, this.search, this.limit)
+      .then(list => this.animalList = list)
+      .catch(() => (
+        notify({
+          title: "noti.master.error-list-title",
+          text: "noti.master.error-list-body",
+        })
+      ))
+  },
   methods: {
     handleDeleteBtn() {
-      console.log('handleDeleteBtn', this.animal)
-      console.log('handleDeleteBtn', this.isOpen)
       this.isOpen = true
     },
     handleDelete(animal) {
       console.log('handleDelete', this.animal)
-      console.log('handleDelete', this.isOpen)
       notify({
         title: "noti.delete-title-success",
         text: "noti.delete-body-success",
