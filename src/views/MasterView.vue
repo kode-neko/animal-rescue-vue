@@ -10,6 +10,9 @@
           append-inner-icon="mdi-magnify"
           single-line
           hide-details
+          v-model="searchStr"
+          v-on:keyup.enter="handleSearch"
+          v-on:blur="handleSearch"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -44,14 +47,15 @@ export default {
   data() {
     return {
       animalList: [],
+      searchStr: '',
+      prevSearchStr: '',
       offset: 0,
-      search: '',
       limit: 5,
       isOpen: false
     }
   },
   mounted() {
-    getAnimalList(this.offset, this.search, this.limit)
+    getAnimalList(this.offset, this.searchStr, this.limit)
       .then(list => this.animalList = list)
       .catch(() => (
         notify({
@@ -61,6 +65,23 @@ export default {
       ))
   },
   methods: {
+    searchAnimals(offset, searchStr, limit) {
+      getAnimalList(offset, searchStr, limit)
+        .then(list => this.animalList = list)
+        .catch(() => (
+          notify({
+            title: "noti.master.error-list-title",
+            text: "noti.master.error-list-body",
+          })
+        ));
+    },
+    handleSearch() {
+      if(this.prevSearchStr !== this.searchStr) {
+        this.offset = 0;
+        this.prevSearchStr = this.searchStr;
+        this.searchAnimals(0, this.searchStr, this.limit);
+      }
+    },
     handleDeleteBtn() {
       this.isOpen = true
     },

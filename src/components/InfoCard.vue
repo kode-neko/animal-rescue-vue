@@ -49,7 +49,7 @@
         delete
       </v-btn>
       <v-btn 
-        @click="$router.push('/edit/333')"
+        @click="$router.push(`/edit/${animal.id}`)"
         variant="outlined"
         prepend-icon="mdi-pencil"
         color="primary"
