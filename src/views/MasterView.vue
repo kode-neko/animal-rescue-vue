@@ -27,6 +27,19 @@
         @delete="handleDeleteBtn"
       />
     </v-row>
+    <v-row 
+      class="d-flex justify-center my-10" 
+    >
+      <v-btn 
+        @click="handleBtnMore"
+        variant="outlined"
+        color="primary"
+        class="ml-3"
+        v-if="isVisibleBtnMore"
+      >
+        btn.more
+      </v-btn>
+    </v-row>
     <DeleteDialog
       :isOpen="isOpen"
       @close="isOpen = false"
@@ -51,23 +64,22 @@ export default {
       prevSearchStr: '',
       offset: 0,
       limit: 5,
-      isOpen: false
+      isOpen: false,
+      isVisibleBtnMore: true
     }
   },
   mounted() {
-    getAnimalList(this.offset, this.searchStr, this.limit)
-      .then(list => this.animalList = list)
-      .catch(() => (
-        notify({
-          title: "noti.master.error-list-title",
-          text: "noti.master.error-list-body",
-        })
-      ))
+    this.searchAnimals(this.offset, this.searchStr, this.limit)
   },
   methods: {
     searchAnimals(offset, searchStr, limit) {
       getAnimalList(offset, searchStr, limit)
-        .then(list => this.animalList = list)
+        .then(list => {
+          if(list.length === 0)
+            this.isVisibleBtnMore = false;
+          else
+            this.animalList = [...this.animalList, ...list]
+        })
         .catch(() => (
           notify({
             title: "noti.master.error-list-title",
@@ -81,6 +93,11 @@ export default {
         this.prevSearchStr = this.searchStr;
         this.searchAnimals(0, this.searchStr, this.limit);
       }
+    },
+    handleBtnMore() {
+      const newOffset = this.offset + this.limit;
+      this.offset = newOffset;
+      this.searchAnimals(newOffset, this.searchStr, this.limit);
     },
     handleDeleteBtn() {
       this.isOpen = true
