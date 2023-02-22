@@ -16,17 +16,17 @@ const vuetify = createVuetify({
   },
 })
 
-// I18next
-import i18n from './i18n'
-import I18NextVue from 'i18next-vue'
-
 // Router - App - css
 import router from './router'
 import App from './App.vue'
 import './assets/main.css'
 
-// SnackBar Queue
+// Notifications
 import Notifications from '@kyvg/vue3-notification'
+
+// I18next
+import i18n from './i18n'
+import I18NextVue from 'i18next-vue'
 
 const app = createApp(App)
 
