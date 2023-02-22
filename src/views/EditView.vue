@@ -3,7 +3,10 @@
     title="edit"
     :breadcrumbs="[{name: 'home', link: '/'}, {name: 'edit'}]"
   >
-    <AnimalForm :animal="animal" />
+    <AnimalForm 
+      :animal="animal" 
+      @save="handleSave"
+    />
   </HeaderSubpage>
 </template>
 
@@ -40,7 +43,33 @@ export default {
   },
   mounted() {
     const route = useRoute();
-    console.log(route.params);
+    getAnimal(route.params.id)
+      .then((animal) => this.animal = animal)
+      .catch(() => {
+        notify({
+          title: "noti.getid-title-error",
+          text: "noti.getid-body-error",
+        });
+        const router = useRouter();
+        router.push('/');
+      })
+  },
+  methods: {
+    handleSave(animal) {
+      postAnimal(animal)
+        .then(() => {
+          notify({
+            title: "noti.save-title-success",
+            text: "noti.save-body-success",
+          });
+        })
+        .catch(() => {
+          notify({
+            title: "noti.save-title-error",
+            text: "noti.save-body-error",
+          });
+        })
+    }
   }
 }
 </script>

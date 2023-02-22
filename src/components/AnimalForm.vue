@@ -221,9 +221,7 @@ export default {
   methods: {
     async handleSubmit() {
       const isFormCorrect = await this.v$.$validate()
-      const desc = this.v$.animal.desc.required.$invalid;
-      console.log('correct', isFormCorrect)
-      console.log('desc', desc)
+      
     },
     async checkField(attr) {
       await this.v$.$validate()
@@ -232,7 +230,8 @@ export default {
       else
       this.hintForm.name = ''
     }
-  }
+  },
+  emits: ['save']
 }
 </script>
 

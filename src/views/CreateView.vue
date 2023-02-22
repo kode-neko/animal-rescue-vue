@@ -3,7 +3,10 @@
     title="create"
     :breadcrumbs="[{name: 'home', link: '/'}, {name: 'create'}]"
   >
-    <AnimalForm :animal="animal" />
+    <AnimalForm 
+      :animal="animal" 
+      @save="handleSave"
+    />
   </HeaderSubpage>
 </template>
 
@@ -18,6 +21,7 @@ import {
 } from '../constants';
 import HeaderSubpage from '../components/HeaderSubpage.vue';
 import AnimalForm from '../components/AnimalForm.vue';
+import { useRouter } from 'vue-router';
 
 export default {
   components: {HeaderSubpage, AnimalForm},
@@ -35,6 +39,25 @@ export default {
         size: Size.LARGE,
         sizeFur: SizeFur.LARGE
       }
+    }
+  },
+  methods: {
+    handleSave(animal) {
+      postAnimal(animal)
+        .then(() => {
+          notify({
+            title: "noti.save-title-success",
+            text: "noti.save-body-success",
+          });
+          const router = useRouter();
+          router.push('/');
+        })
+        .catch(() => {
+          notify({
+            title: "noti.save-title-error",
+            text: "noti.save-body-error",
+          });
+        })
     }
   }
 }
