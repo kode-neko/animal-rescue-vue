@@ -22,10 +22,13 @@ import {
 import HeaderSubpage from '../components/HeaderSubpage.vue';
 import AnimalForm from '../components/AnimalForm.vue';
 import { useRouter } from 'vue-router';
+import { mapWritableState } from 'pinia'
+import useAppStore from '../stores/app';
 
 export default {
   components: {HeaderSubpage, AnimalForm},
   data() {
+    const appStore = useAppStore();
     return {
       animal: {
         name: '',
@@ -38,11 +41,13 @@ export default {
         species: Species.CAT,
         size: Size.LARGE,
         sizeFur: SizeFur.LARGE
-      }
+      },
+      ...mapWritableState(appStore, ['animalPost'])
     }
   },
   methods: {
     handleSave(animal) {
+      this.animalPost.value = true;
       postAnimal(animal)
         .then(() => {
           notify({
@@ -58,6 +63,7 @@ export default {
             text: "noti.save-body-error",
           });
         })
+        .finally(() => this.animalPost.value = false)
     }
   }
 }

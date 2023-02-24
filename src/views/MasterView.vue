@@ -53,11 +53,14 @@
 import InfoCard from '../components/InfoCard.vue';
 import { notify } from "@kyvg/vue3-notification";
 import DeleteDialog from '../components/dialog/DeleteDialog.vue';
-import { getAnimalList } from '../api/animal';
+import { deleteAnimal, getAnimalList } from '../api/animal';
+import { mapWritableState } from 'pinia'
+import useAppStore from '../stores/app';
 
 export default {
   components: { InfoCard, DeleteDialog },
   data() {
+    const appStore = useAppStore();
     return {
       animalList: [],
       searchStr: '',
@@ -65,14 +68,16 @@ export default {
       offset: 0,
       limit: 5,
       isOpen: false,
-      isVisibleBtnMore: true
-    }
+      isVisibleBtnMore: true,
+      ...mapWritableState(appStore, ['animalGetList', 'animalDelete'])
+    };
   },
   mounted() {
     this.searchAnimals(this.offset, this.searchStr, this.limit)
   },
   methods: {
     searchAnimals(offset, searchStr, limit) {
+      this.animalGetList.value = true;
       getAnimalList(offset, searchStr, limit)
         .then(list => {
           if(list.length === 0)
@@ -85,7 +90,8 @@ export default {
             title: "noti.master.error-list-title",
             text: "noti.master.error-list-body",
           })
-        ));
+        ))
+        .finally(() => this.animalGetList.value = false);
     },
     handleSearch() {
       if(this.prevSearchStr !== this.searchStr) {
@@ -103,12 +109,22 @@ export default {
       this.isOpen = true
     },
     handleDelete(animal) {
-      console.log('handleDelete', this.animal)
-      notify({
-        title: "noti.delete-title-success",
-        text: "noti.delete-body-success",
-      });
       this.isOpen = false
+      this.animalDelete.value = true;
+      deleteAnimal(animal.id)
+        .then(list => (
+          notify({
+            title: "noti.master.error-delete-title",
+            text: "noti.master.error-delete-body",
+          })
+        ))
+        .catch(() => (
+          notify({
+            title: "noti.master.error-delete-title",
+            text: "noti.master.error-delete-body",
+          })
+        ))
+        .finally(() => this.animalDelete.value = false);
     }
   },
 }
