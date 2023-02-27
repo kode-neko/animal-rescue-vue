@@ -2,7 +2,7 @@
   <v-app>
     <MainBar 
       theme="dark" 
-      lang="es" 
+      :lang="lang" 
       :drawer="drawer"
       @changeDrawer="handleClickMenu"
       @changeTheme="handleChangeTheme"
@@ -10,7 +10,7 @@
       />
     <MainBarDrawer
       theme="dark" 
-      lang="es" 
+      :lang="lang" 
       :drawer="drawer"
       @changeTheme="handleChangeTheme"
       @changeLang="handleChangeLang"
@@ -47,7 +47,7 @@ export default {
     })
     return {
       drawer: false,
-      lang: 'es',
+      lang: 'en',
       theme: 'dark',
       isLoading: false
     }

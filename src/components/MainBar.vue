@@ -5,14 +5,16 @@
   >
     <template v-slot:prepend>
       <v-app-bar-nav-icon class="d-md-none" @click.stop="drawerVal = !drawerVal"></v-app-bar-nav-icon>
-      <v-icon class="iconTitle" icon="mdi-paw"></v-icon>
-      <v-toolbar-title>Animal Rescue</v-toolbar-title>
+      <div class="d-flex align-center" @click="handleHome">
+        <v-icon class="mr-2" icon="mdi-paw"></v-icon>
+        <v-toolbar-title>Animal Rescue</v-toolbar-title>
+      </div>
     </template>
     <template v-slot:append>
-      <div class="d-none d-md-flex contFlex">
+      <div class="d-none d-md-flex align-center">
         <v-btn variant="text" icon="mdi-plus-circle" @click="$router.push('/create')"></v-btn>
-        <v-btn variant="text" icon="mdi-share-variant"></v-btn>
-        <SwitchTheme :theme="theme" @change="(newTheme) => $emit('changeTheme', newTheme)"/>
+        <v-btn variant="text" class="mr-2" icon="mdi-share-variant"></v-btn>
+        <SwitchTheme class="mr-2" :theme="theme" @change="(newTheme) => $emit('changeTheme', newTheme)"/>
         <SelectLang :lang="lang" @change="(newLang) => $emit('changeLang', newLang)"/>
       </div>
     </template>
@@ -23,6 +25,7 @@
 import {socialList} from '../constants';
 import SwitchTheme from './SwitchTheme.vue';
 import SelectLang from './SelectLang.vue';
+import { useRouter } from 'vue-router';
 
 export default {
   components: {SwitchTheme, SelectLang},
@@ -52,6 +55,12 @@ export default {
   watch: {
     drawerVal(val) {
       this.$emit('changeDrawer', val)
+    }
+  },
+  methods: {
+    handleHome() {
+      const router = useRouter();
+      router.push('/')
     }
   },
   emit: ['changeTheme', 'changeLang', 'changeDrawer'],
