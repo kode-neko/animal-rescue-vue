@@ -12,8 +12,11 @@ const vuetify = createVuetify({
   components,
   directives,
   icons: {
-    iconfont: 'mdi', // default - only for display purposes
+    iconfont: 'mdi',
   },
+  theme: {
+    defaultTheme: 'dark'
+  }
 })
 
 // Router - App - css

@@ -9,8 +9,8 @@
     </v-list>
     <v-divider></v-divider>
     <v-list density="compact" nav>
-      <v-list-item prepend-icon="mdi-home-variant" title="Home" value="home"></v-list-item>
-      <v-list-item prepend-icon="mdi-plus-circle" title="Create" value="create"></v-list-item>
+      <v-list-item prepend-icon="mdi-home-variant" title="Home" :value="$t('pages.home')"></v-list-item>
+      <v-list-item prepend-icon="mdi-plus-circle" title="Create" :value="$t('pages.create')"></v-list-item>
     </v-list>
     <v-divider></v-divider>
       <v-list-item>

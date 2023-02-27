@@ -1,7 +1,7 @@
 <template>
   <HeaderSubpage
-    title="edit"
-    :breadcrumbs="[{name: 'home', link: '/'}, {name: 'edit'}]"
+    :title="$t('pages.edit')"
+    :breadcrumbs="[{name: $t('pages.home'), link: '/'}, {name: $t('pages.edit')}]"
   >
     <AnimalForm 
       :animal="animal" 
@@ -24,6 +24,7 @@ import AnimalForm from '../components/AnimalForm.vue';
 import {useRoute} from 'vue-router';
 import { mapWritableState } from 'pinia'
 import useAppStore from '../stores/app';
+import { getAnimal } from '../api/animal';
 
 export default {
   components: { HeaderSubpage, AnimalForm },

@@ -6,7 +6,7 @@
           :loading="loading"
           density="compact"
           variant="solo"
-          label="buscar..."
+          :label="$t('placeholder.search')"
           append-inner-icon="mdi-magnify"
           single-line
           hide-details
@@ -37,7 +37,7 @@
         class="ml-3"
         v-if="isVisibleBtnMore"
       >
-        btn.more
+        {{ $t('btns.load-more') }}
       </v-btn>
     </v-row>
     <DeleteDialog

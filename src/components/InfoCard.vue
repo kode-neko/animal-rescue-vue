@@ -16,20 +16,20 @@
         <v-col cols="6" md="3">
           <v-list lines="one">
             <v-list-item
-              v-for="attr in attrAnimalCol01"
+              v-for="attr in col01"
               :key="attr"
-              :title="attr"
-              :subtitle="parseAttr(attr, animal[attr])"
+              :title="attr.label"
+              :subtitle="attr.value"
             ></v-list-item>
           </v-list>
         </v-col>
         <v-col cols="6" md="3">
           <v-list lines="one">
             <v-list-item
-              v-for="attr in attrAnimalCol02"
+              v-for="attr in col02"
               :key="attr"
-              :title="attr"
-              :subtitle="parseAttr(attr, animal[attr])"
+              :title="attr.label"
+              :subtitle="attr.value"
             ></v-list-item>
           </v-list>
         </v-col>
@@ -46,7 +46,7 @@
         color="primary"
         class="ml-3"
       >
-        delete
+        {{ $t(`btns.delete`) }}
       </v-btn>
       <v-btn 
         @click="$router.push(`/edit/${animal.id}`)"
@@ -55,7 +55,7 @@
         color="primary"
         class="ml-3"
       >
-        edit
+        {{ $t(`btns.edit`) }}
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -72,10 +72,22 @@ export default {
     animal: Object,
   },
   data() {
+    const {bday, species, breed, color, eyes, size, sizeFur} = this.animal;
+    const col01 = [
+      {label: this.$t('fields.bday'), value: this.formatDate(bday)},
+      {label: this.$t('fields.species'), value: this.$t(`lists.species.${species}`)},
+      {label: this.$t('fields.breed'), value: breed},
+      {label: this.$t('fields.color'), value: this.$t(`lists.colors.${color}`)},
+    ];
+    const col02 = [
+      {label: this.$t('fields.eyes'), value: this.$t(`lists.colors.${eyes}`)},
+      {label: this.$t('fields.size'), value: this.$t(`lists.sizes.${size}`)},
+      {label: this.$t('fields.sizeFur'), value: this.$t(`lists.sizes.${sizeFur}`)},
+    ];
     const imgUrl = new URL(`../assets/cat.png`, import.meta.url).href;
     return {
-      attrAnimalCol01,
-      attrAnimalCol02,
+      col01,
+      col02,
       avatar: imgUrl,
     }
   },
@@ -83,14 +95,8 @@ export default {
     getAvatar(species) {
       return new URL(`../assets/${species}.png`, import.meta.url).href;
     },
-    parseAttr(attr, val) {
-      if('bday' === attr)
-        return this.formatDate(val);
-      else
-        return val;
-    },
     formatDate(bday) {
-      dayjs(bday).format('DD/MM/YYYY');
+      return dayjs(bday).format('DD/MM/YYYY');
     }
   },
   emits: ['delete']
