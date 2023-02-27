@@ -17,6 +17,9 @@
     "sizeFur": "Fur",
     "desc": "Description"
   },
+  "placeholder": {
+    "search": "search..."
+  },
   "btns": {
     "create": "Create",
     "save": "Save",

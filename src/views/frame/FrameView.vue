@@ -5,15 +5,15 @@
       lang="es" 
       :drawer="drawer"
       @changeDrawer="handleClickMenu"
-      @changeTheme="handleChange"
-      @changeLang="handleChange"
+      @changeTheme="handleChangeTheme"
+      @changeLang="handleChangeLang"
       />
     <MainBarDrawer
       theme="dark" 
       lang="es" 
       :drawer="drawer"
-      @changeTheme="handleChange"
-      @changeLang="handleChange"
+      @changeTheme="handleChangeTheme"
+      @changeLang="handleChangeLang"
       @changeDrawer="(val) => drawer = val"
     />
     <v-main class="pt-12 main">
@@ -56,8 +56,11 @@ export default {
     handleClickMenu(val) {
       this.drawer = val;
     },
-    handleChange(val) {
-      console.log('FV: ', val);
+    handleChangeTheme(theme) {
+      console.log('theme: ', theme);
+    },
+    handleChangeLang(lang) {
+      this.$i18next.changeLanguage(lang);
     },
   }
 }

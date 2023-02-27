@@ -14,10 +14,10 @@
     </v-list>
     <v-divider></v-divider>
       <v-list-item>
-        <SwitchTheme :theme="theme" @change="(newTheme) => $emit('clickChangeTheme', newTheme)"/>
+        <SwitchTheme :theme="theme" @change="(newTheme) => $emit('changeTheme', newTheme)"/>
       </v-list-item>
       <v-list-item>
-        <SelectLang :lang="lang" @change="(newLang) => $emit('clickChangeLang', newLang)"/>
+        <SelectLang :lang="lang" @change="(newLang) => $emit('changeLang', newLang)"/>
       </v-list-item>
     <v-divider></v-divider>
     <v-list density="compact" nav>

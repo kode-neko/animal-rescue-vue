@@ -18,8 +18,8 @@
             <v-list-item
               v-for="attr in col01"
               :key="attr"
-              :title="attr.label"
-              :subtitle="attr.value"
+              :title="$t(attr.label)"
+              :subtitle="$t(attr.value)"
             ></v-list-item>
           </v-list>
         </v-col>
@@ -28,8 +28,8 @@
             <v-list-item
               v-for="attr in col02"
               :key="attr"
-              :title="attr.label"
-              :subtitle="attr.value"
+              :title="$t(attr.label)"
+              :subtitle="$t(attr.value)"
             ></v-list-item>
           </v-list>
         </v-col>
@@ -74,15 +74,15 @@ export default {
   data() {
     const {bday, species, breed, color, eyes, size, sizeFur} = this.animal;
     const col01 = [
-      {label: this.$t('fields.bday'), value: this.formatDate(bday)},
-      {label: this.$t('fields.species'), value: this.$t(`lists.species.${species}`)},
-      {label: this.$t('fields.breed'), value: breed},
-      {label: this.$t('fields.color'), value: this.$t(`lists.colors.${color}`)},
+      {label: 'fields.bday', value: this.formatDate(bday)},
+      {label: 'fields.species', value: `lists.species.${species}`},
+      {label: 'fields.breed', value: breed},
+      {label: 'fields.color', value: `lists.colors.${color}`},
     ];
     const col02 = [
-      {label: this.$t('fields.eyes'), value: this.$t(`lists.colors.${eyes}`)},
-      {label: this.$t('fields.size'), value: this.$t(`lists.sizes.${size}`)},
-      {label: this.$t('fields.sizeFur'), value: this.$t(`lists.sizes.${sizeFur}`)},
+      {label: 'fields.eyes', value: `lists.colors.${eyes}`},
+      {label: 'fields.size', value: `lists.sizes.${size}`},
+      {label: 'fields.sizeFur', value: `lists.sizes.${sizeFur}`},
     ];
     const imgUrl = new URL(`../assets/cat.png`, import.meta.url).href;
     return {
