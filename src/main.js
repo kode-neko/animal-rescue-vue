@@ -7,15 +7,24 @@ import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import '@mdi/font/css/materialdesignicons.css'
+import colors from 'vuetify/lib/util/colors'
 
 const vuetify = createVuetify({
+  theme: {
+    defaultTheme: 'dark',
+    themes: {
+      dark: {
+        dark: false,
+        colors: {
+          primary: colors.purple.base,
+        }
+      },
+    },
+  },
   components,
   directives,
   icons: {
     iconfont: 'mdi',
-  },
-  theme: {
-    defaultTheme: 'dark'
   }
 })
 

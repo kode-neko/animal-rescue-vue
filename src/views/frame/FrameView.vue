@@ -36,6 +36,7 @@
 import MainBar from '../../components/MainBar.vue';
 import MainBarDrawer from '../../components/MainBarDrawer.vue';
 import useAppStore from '../../stores/app';
+import { useTheme } from 'vuetify'
 
 export default {
   components: { MainBar, MainBarDrawer },
@@ -56,8 +57,10 @@ export default {
     handleClickMenu(val) {
       this.drawer = val;
     },
-    handleChangeTheme(theme) {
-      console.log('theme: ', theme);
+    handleChangeTheme(themeSel) {
+      // const theme = useTheme();
+      // theme.global.name.value = themeSel;
+      console.log(this.$vuetify);
     },
     handleChangeLang(lang) {
       this.$i18next.changeLanguage(lang);

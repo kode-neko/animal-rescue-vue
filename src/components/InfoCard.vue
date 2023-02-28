@@ -43,7 +43,7 @@
         @click="$emit('delete', animal)"
         variant="outlined"
         prepend-icon="mdi-delete"
-        color="primary"
+        color="amber"
         class="ml-3"
       >
         {{ $t(`btns.delete`) }}
@@ -52,7 +52,7 @@
         @click="$router.push(`/edit/${animal.id}`)"
         variant="outlined"
         prepend-icon="mdi-pencil"
-        color="primary"
+        color="amber"
         class="ml-3"
       >
         {{ $t(`btns.edit`) }}

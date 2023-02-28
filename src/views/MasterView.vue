@@ -18,7 +18,7 @@
     </v-row>
     <v-row 
       class="d-flex flex-column my-10" 
-      :style="{gap: '18px'}"
+      :style="{gap: '24px'}"
     >
       <InfoCard
         v-for="animal in animalList"
@@ -32,9 +32,9 @@
     >
       <v-btn 
         @click="handleBtnMore"
-        variant="outlined"
         color="primary"
         class="ml-3"
+        size="large"
         v-if="isVisibleBtnMore"
       >
         {{ $t('btns.load-more') }}
