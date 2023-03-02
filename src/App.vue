@@ -5,6 +5,7 @@ export default {
 
 <template>
   <router-view></router-view>
+  <notifications />
 </template>
 
 <style>

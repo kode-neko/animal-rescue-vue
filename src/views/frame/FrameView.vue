@@ -1,41 +1,78 @@
 <template>
-  <v-card>
-    <v-layout>
-      <v-app-bar
+  <v-app>
+    <MainBar 
+      :theme="theme" 
+      :lang="lang" 
+      :drawer="drawer"
+      @changeDrawer="handleClickMenu"
+      @changeTheme="handleChangeTheme"
+      @changeLang="handleChangeLang"
+      />
+    <MainBarDrawer
+      theme="dark" 
+      :lang="lang" 
+      :drawer="drawer"
+      @changeDrawer="(val) => drawer = val"
+      @changeTheme="handleChangeTheme"
+      @changeLang="handleChangeLang"
+    />
+    <v-main class="pt-12 main">
+      <router-view></router-view>
+    </v-main>
+    <v-overlay
+      :model-value="isLoading"
+      class="align-center justify-center"
+    >
+      <v-progress-circular
         color="primary"
-        prominent
-      >
-        <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-toolbar-title>My files</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-btn variant="text" icon="mdi-magnify"></v-btn>
-        <v-btn variant="text" icon="mdi-filter"></v-btn>
-        <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
-      </v-app-bar>
-
-      <v-navigation-drawer
-        v-model="drawer"
-        location="bottom"
-        temporary
-      >
-        <v-list :items="items"></v-list>
-      </v-navigation-drawer>
-
-      <v-main>
-        <v-card-text>
-          <router-view></router-view>
-        </v-card-text>
-      </v-main>
-    </v-layout>
-  </v-card>
+        indeterminate
+        size="64"
+      ></v-progress-circular>
+    </v-overlay>
+  </v-app>
 </template>
 
 <script>
-export default {
+import MainBar from '../../components/MainBar.vue';
+import MainBarDrawer from '../../components/MainBarDrawer.vue';
+import useAppStore from '../../stores/app';
+import { useTheme } from 'vuetify'
 
+export default {
+  components: { MainBar, MainBarDrawer },
+  data() {
+    const appStore = useAppStore();
+    appStore.$subscribe((mutation, state) => {
+      const flags = Object.values(state);
+      this.isLoading = flags.some(f => f);
+    })
+    return {
+      drawer: false,
+      lang: 'en',
+      theme: 'dark',
+      isLoading: false
+    }
+  },
+  methods: {
+    handleClickMenu(val) {
+      this.drawer = val;
+    },
+    handleChangeTheme(themeSel) {
+      this.$vuetify.theme.name = themeSel;
+    },
+    handleChangeLang(lang) {
+      this.$i18next.changeLanguage(lang);
+    },
+  }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.main {
+  width: 992px;
+  margin: 0 auto;
+  margin-top: 60px;
+  padding: 0 24px;
+}
 
 </style>
