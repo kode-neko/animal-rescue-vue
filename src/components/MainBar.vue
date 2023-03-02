@@ -14,7 +14,7 @@
       <div class="d-none d-md-flex align-center">
         <v-btn variant="text" icon="mdi-plus-circle" @click="$router.push('/create')"></v-btn>
         <v-btn variant="text" class="mr-2" icon="mdi-share-variant"></v-btn>
-        <SwitchTheme class="mr-2" :theme="theme" @change="(newTheme) => $emit('changeTheme', newTheme)"/>
+        <SwitchTheme class="mr-2" :theme="theme" @changeSw="(newTheme) => $emit('changeTheme', newTheme)"/>
         <SelectLang :lang="lang" @change="(newLang) => $emit('changeLang', newLang)"/>
       </div>
     </template>

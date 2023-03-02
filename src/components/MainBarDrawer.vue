@@ -14,7 +14,7 @@
     </v-list>
     <v-divider></v-divider>
       <v-list-item>
-        <SwitchTheme :theme="theme" @change="(newTheme) => $emit('changeTheme', newTheme)"/>
+        <SwitchTheme :theme="theme" @changeSW="(newTheme) => $emit('changeTheme', newTheme)"/>
       </v-list-item>
       <v-list-item>
         <SelectLang :lang="lang" @change="(newLang) => $emit('changeLang', newLang)"/>

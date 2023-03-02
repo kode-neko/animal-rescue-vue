@@ -28,7 +28,7 @@ export default {
   watch: {
     themeVal(value) {
       this.themeVal = value;
-      this.$emit('change', this.themeVal ? 'dark' : 'light')
+      this.$emit('changeSw', this.themeVal ? 'dark' : 'light')
     }
   },
   emit: ['change']

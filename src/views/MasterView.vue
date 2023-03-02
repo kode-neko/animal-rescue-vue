@@ -18,7 +18,7 @@
     </v-row>
     <v-row 
       class="d-flex flex-column my-10" 
-      :style="{gap: '24px'}"
+      :style="{gap: '42px'}"
     >
       <InfoCard
         v-for="animal in animalList"

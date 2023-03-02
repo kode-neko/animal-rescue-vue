@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <MainBar 
-      theme="dark" 
+      :theme="theme" 
       :lang="lang" 
       :drawer="drawer"
       @changeDrawer="handleClickMenu"
@@ -12,9 +12,9 @@
       theme="dark" 
       :lang="lang" 
       :drawer="drawer"
+      @changeDrawer="(val) => drawer = val"
       @changeTheme="handleChangeTheme"
       @changeLang="handleChangeLang"
-      @changeDrawer="(val) => drawer = val"
     />
     <v-main class="pt-12 main">
       <router-view></router-view>
@@ -58,9 +58,7 @@ export default {
       this.drawer = val;
     },
     handleChangeTheme(themeSel) {
-      // const theme = useTheme();
-      // theme.global.name.value = themeSel;
-      console.log(this.$vuetify);
+      this.$vuetify.theme.name = themeSel;
     },
     handleChangeLang(lang) {
       this.$i18next.changeLanguage(lang);
