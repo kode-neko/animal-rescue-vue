@@ -1,3 +1,87 @@
 {
-  "title": "Animal Rescue"
+  "title": "Animal Rescue",
+  "pages": {
+    "home": "Home",
+    "create": "Crear",
+    "edit": "Editar"
+  },
+  "fields": {
+    "name": "Name",
+    "sex": "Sex",
+    "bday": "Nacimiento",
+    "species": "Especie",
+    "breed": "Raza",
+    "colorFur": "Color",
+    "eyes": "Ojos",
+    "size": "Tamaño",
+    "sizeFur": "Pelaje",
+    "desc": "Description"
+  },
+  "placeholder": {
+    "search": "buscar..."
+  },
+  "btns": {
+    "create": "Crear",
+    "save": "Guardar",
+    "edit": "Editar",
+    "delete": "Borrar",
+    "cancel": "Cancelar",
+    "load-more": "Cargar Más",
+    "theme": "Tema",
+    "lang": "Idioma",
+    "home": "Home"
+  },
+  "lists" : {
+    "species": {
+      "cat": "Gato",
+      "dog": "Perro",
+      "cow": "Vaca"
+    },
+    "sex": {
+      "male": "Macho",
+      "female": "Hembra"
+    },
+    "colors": {
+      "black": "Negro",
+      "white": "Blanco",
+      "gray": "Gris",
+      "red": "Rojos",
+      "blue": "Azul",
+      "brown": "Marrón",
+      "dark_brown": "Marrón Oscuro",
+      "blonde": "Rubio",
+      "green": "Verde",
+      "yellow": "Amarillo"
+    },
+    "sizes": {
+      "small": "Pequeño",
+      "medium": "Mediano",
+      "large": "Grande",
+      "none": "ninguno",
+      "long": "Largo",
+      "short": "Corto"
+    }
+  },
+  "alert": {
+    "title": {
+      "delete": "Eliminar {{species}}"
+    },
+    "body": {
+      "delete": "¿Desea borrar \"{{species}}\" mmado \"{{name}}\"?"
+    }
+  },
+  "msg": {
+    "succes": {
+      "animal-edit": "Animal edited successfully",
+      "animal-create": "Animal created successfully",
+      "animal-delete": "Animal deleted successfully"
+    },
+    "error": {
+      "animal-info": "The animal information cannot be getted. Try again later",
+      "animal-list": "The animal list cannot be getted. Try again later",
+      "animal-edit": "The animal cannot be edited. Try again later",
+      "animal-create": "The animal cannot be cerated. Try again later",
+      "animal-delete": "The animal cannot be deleted. Try again later"
+    }
+  }
 }
