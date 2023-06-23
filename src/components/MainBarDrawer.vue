@@ -5,7 +5,7 @@
     temporary
   >
     <v-list>
-      <v-list-item prepend-icon="mdi-arrow-left" value="back" @click="$emit('changeDrawer', false)"></v-list-item>
+      <v-list-item prepend-icon="mdi-arrow-left" value="back" @click="$emit('changeDrawer')"></v-list-item>
     </v-list>
     <v-divider></v-divider>
     <v-list density="compact" nav>

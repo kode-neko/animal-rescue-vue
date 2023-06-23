@@ -4,7 +4,7 @@
     prominent
   >
     <template v-slot:prepend>
-      <v-app-bar-nav-icon class="d-md-none" @click.stop="drawerVal = !drawerVal"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon class="d-md-none" @click.stop="$emit('changeDrawer')"></v-app-bar-nav-icon>
       <div class="d-flex align-center" @click="handleHome">
         <v-icon class="mr-2" icon="mdi-paw"></v-icon>
         <v-toolbar-title>Animal Rescue</v-toolbar-title>
@@ -53,8 +53,8 @@ export default {
     }
   },
   watch: {
-    drawerVal(val) {
-      this.$emit('changeDrawer', val)
+    drawer(val) {
+      this.drawerVal = val;
     }
   },
   methods: {

@@ -12,7 +12,7 @@
       theme="dark" 
       :lang="lang" 
       :drawer="drawer"
-      @changeDrawer="(val) => drawer = val"
+      @changeDrawer="handleClickMenu"
       @changeTheme="handleChangeTheme"
       @changeLang="handleChangeLang"
     />
@@ -54,8 +54,8 @@ export default {
     }
   },
   methods: {
-    handleClickMenu(val) {
-      this.drawer = val;
+    handleClickMenu() {
+      this.drawer = !this.drawer;
     },
     handleChangeTheme(themeSel) {
       this.$vuetify.theme.name = themeSel;
