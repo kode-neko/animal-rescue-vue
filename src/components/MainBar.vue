@@ -13,7 +13,28 @@
     <template v-slot:append>
       <div class="d-none d-md-flex align-center">
         <v-btn variant="text" icon="mdi-plus-circle" @click="$router.push('/create')"></v-btn>
-        <v-btn variant="text" class="mr-2" icon="mdi-share-variant"></v-btn>
+
+
+          <v-menu>
+            <template v-slot:activator="{ props }">
+              <v-btn icon="mdi-share-variant" v-bind="props"></v-btn>
+            </template>
+
+            <v-list>
+              <v-list-item 
+                v-for="social in socialList"
+                link
+                :href="social.url"
+                :key="social" 
+                :prepend-icon="social.icon" 
+                :title="social.name" 
+                :value="social.name"
+                target="_blank"
+              ></v-list-item>
+            </v-list>
+          </v-menu>
+
+        
         <SwitchTheme class="mr-2" :theme="theme" @changeSw="(newTheme) => $emit('changeTheme', newTheme)"/>
         <SelectLang :lang="lang" @change="(newLang) => $emit('changeLang', newLang)"/>
       </div>

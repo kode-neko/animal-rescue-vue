@@ -21,13 +21,16 @@
       </v-list-item>
     <v-divider></v-divider>
     <v-list density="compact" nav>
-      <v-list-item 
-        v-for="social in socialList"
-        :key="social" 
-        :prepend-icon="social.icon" 
-        :title="social.name" 
-        :value="social.name"
-      ></v-list-item>
+        <v-list-item 
+          v-for="social in socialList"
+          link
+          :href="social.url"
+          :key="social" 
+          :prepend-icon="social.icon" 
+          :title="social.name" 
+          :value="social.name"
+          target="_blank"
+        ></v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
