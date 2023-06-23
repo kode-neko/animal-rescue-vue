@@ -63,13 +63,23 @@ const socialGithub = {
   url: 'https://github.com/kode-neko',
   icon: 'mdi-github',
 };
-const socialLinkedin = {
-  name: 'LinkedIn',
-  url: 'https://es.linkedin.com/',
-  icon: 'mdi-linkedin',
+const socialCodepen = {
+  name: 'CodePen',
+  url: 'https://codepen.io/kodeneko',
+  icon: 'mdi-codepen',
+};
+const socialStackblitz = {
+  name: 'Stackblitz',
+  url: 'https://stackblitz.com/@kode-neko',
+  icon: 'mdi-lightning-bolt',
+};
+const socialFigma = {
+  name: 'Figma',
+  url: 'https://www.figma.com/@kodeneko',
+  icon: 'mdi-palette',
 };
 
-const socialList = [socialTwitter, socialGithub, socialLinkedin];
+const socialList = [socialTwitter, socialGithub, socialCodepen, socialStackblitz, socialFigma];
 const limitListRest = 5;
 
 export {
