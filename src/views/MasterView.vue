@@ -3,7 +3,7 @@
     <v-row justify="end" >
       <v-col xs="12" md="7" class="d-flex align-center">
         <v-text-field
-          :loading="loading"
+          :loading="this.animalGetList"
           density="compact"
           variant="solo"
           :placeholder="$t('placeH.search')"
@@ -69,13 +69,12 @@ import FooterItem from '../components/FooterItem.vue';
 import { notify } from "@kyvg/vue3-notification";
 import DeleteDialog from '../components/dialog/DeleteDialog.vue';
 import { deleteAnimal, getAnimalList } from '../api/animal';
-import { mapWritableState } from 'pinia'
+import { mapActions, mapWritableState } from 'pinia'
 import useAppStore from '../stores/app';
 
 export default {
   components: { InfoCard, DeleteDialog, FooterItem },
   data() {
-    const appStore = useAppStore();
     return {
       animalList: [],
       searchStr: '',
@@ -84,15 +83,17 @@ export default {
       limit: 5,
       isOpen: false,
       isVisibleBtnMore: true,
-      ...mapWritableState(appStore, ['animalGetList', 'animalDelete'])
     };
+  },
+  computed: {
+    ...mapWritableState(useAppStore, ['animalGetList', 'animalDelete'])
   },
   mounted() {
     this.searchAnimals(this.offset, this.searchStr, this.limit, [])
   },
   methods: {
     searchAnimals(offset, searchStr, limit, prevList) {
-      this.animalGetList.value = true;
+      this.animalGetList = true;
       getAnimalList(offset, searchStr, limit)
         .then(list => {
           if(list.length < limit)
@@ -105,7 +106,7 @@ export default {
             text: "noti.master.error-list-body",
           })
         ))
-        .finally(() => this.animalGetList.value = false);
+        .finally(() => this.animalGetList = false);
     },
     hancleClickAll() {
       this.handleSearch('', []);
@@ -152,6 +153,10 @@ export default {
       },
       isOpen(val) {
         this.isOpen = val;
+      },
+      searchStr(val) {
+        this.prevSearchStr = val;
+        this.searchStr = val;
       }
     }
   },

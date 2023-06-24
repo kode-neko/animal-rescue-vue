@@ -20,7 +20,7 @@
       <router-view></router-view>
     </v-main>
     <v-overlay
-      :model-value="isLoading"
+      :model-value="animalGetList"
       class="align-center justify-center"
     >
       <v-progress-circular
@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { mapState } from 'pinia';
 import MainBar from '../../components/MainBar.vue';
 import MainBarDrawer from '../../components/MainBarDrawer.vue';
 import useAppStore from '../../stores/app';
@@ -41,17 +42,14 @@ import { useTheme } from 'vuetify'
 export default {
   components: { MainBar, MainBarDrawer },
   data() {
-    const appStore = useAppStore();
-    appStore.$subscribe((mutation, state) => {
-      const flags = Object.values(state);
-      this.isLoading = flags.some(f => f);
-    })
     return {
       drawer: false,
       lang: 'en',
       theme: 'dark',
-      isLoading: false
     }
+  },
+  computed: {
+    ...mapState(useAppStore, ['animalGetList'])
   },
   methods: {
     handleClickMenu() {

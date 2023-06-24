@@ -18,9 +18,12 @@ const useAppStore = defineStore('user', {
       animalDelete: false,
     }
   },
+  getters: {
+    isLoading: (state) => Object.values(state).some(f => f)
+  },
   actions: {
     setPending(name, flag) {
-      this.state[name] = flag;
+      this[name] = flag;
     }
   }
 });
