@@ -1,13 +1,24 @@
 {
-  "title": "Animal Rescue",
   "pages": {
-    "home": "Home",
+    "master": "Home",
     "create": "Crear",
     "edit": "Editar"
   },
-  "fields": {
-    "name": "Name",
-    "sex": "Sex",
+  "noData": "Animales no encontrados...",
+  "credits": "Kodeneko @ 2022",
+  "msg": {
+    "errorGet": "No se pudo obtener la información del animal. Inténtelo más tarde",
+    "errorList": "No se pudo obtener el listado de animales. Inténtelo más tarde",
+    "successPut": "Animal editado con éxito",
+    "errorPut": "No se pudo editar el animal. Inténtelo más tarde",
+    "successPost": "Animal creado con éxito",
+    "errorPost": "No se pudo crear el animal. Inténtelo más tarde",
+    "successDelete": "Animal borrado con éxito",
+    "errorDelete": "No se pudo borrar el animal. Inténtelo más tarde"
+  },
+  "labels": {
+    "name": "Nombre",
+    "sex": "Sexo",
     "bday": "Nacimiento",
     "species": "Especie",
     "breed": "Raza",
@@ -15,73 +26,60 @@
     "eyes": "Ojos",
     "size": "Tamaño",
     "sizeFur": "Pelaje",
-    "desc": "Description"
-  },
-  "placeholder": {
-    "search": "buscar..."
-  },
-  "btns": {
+    "desc": "Descripción",
+    "home": "Home",
     "create": "Crear",
+    "cancel": "Cancelar",
+    "accept": "Aceptar",
     "save": "Guardar",
     "edit": "Editar",
-    "delete": "Borrar",
-    "cancel": "Cancelar",
-    "load-more": "Cargar Más",
-    "theme": "Tema",
-    "lang": "Idioma",
-    "home": "Home"
+    "delete": "Eliminar",
+    "loadmore": "Cargar más",
+    "all": "Todos"
   },
-  "lists" : {
-    "species": {
-      "cat": "Gato",
-      "dog": "Perro",
-      "cow": "Vaca"
-    },
-    "sex": {
-      "male": "Macho",
-      "female": "Hembra"
-    },
-    "colors": {
-      "black": "Negro",
-      "white": "Blanco",
-      "gray": "Gris",
-      "red": "Rojos",
-      "blue": "Azul",
-      "brown": "Marrón",
-      "dark_brown": "Marrón Oscuro",
-      "blonde": "Rubio",
-      "green": "Verde",
-      "yellow": "Amarillo"
-    },
-    "sizes": {
-      "small": "Pequeño",
-      "medium": "Mediano",
-      "large": "Grande",
-      "none": "ninguno",
-      "long": "Largo",
-      "short": "Corto"
-    }
+  "placeH": {
+    "search": "Buscar..."
   },
-  "alert": {
+  "form": {
+    "empty": "El campo no puede estar vacío",
+    "max": "Solo {{size}} caracteres máximo"
+  },
+  "modal": {
     "title": {
-      "delete": "Eliminar {{species}}"
+      "delete": "Borrar {{species}}"
     },
     "body": {
-      "delete": "¿Desea borrar \"{{species}}\" mmado \"{{name}}\"?"
+      "delete_male": "¿Quieres borrar el {{species}} llamado \"{{name}}\"?",
+      "delete_female": "¿Quieres borrar la {{species}} llamada \"{{name}}\"?"
     }
   },
-  "msg": {
-    "succes": {
-      "animal-edit": "Animal edited successfully",
-      "animal-create": "Animal created successfully",
-      "animal-delete": "Animal deleted successfully"
-    },
-    "error": {
-      "animal-info": "The animal information cannot be getted. Try again later",
-      "animal-list": "The animal list cannot be getted. Try again later",
-      "animal-edit": "The animal cannot be edited. Try again later",
-      "animal-create": "The animal cannot be cerated. Try again later",
-      "animal-delete": "The animal cannot be deleted. Try again later"
-    }
+  "species": {
+    "cat": "Gato",
+    "dog": "Perro",
+    "cow": "Vaca"
+  },
+  "sex": {
+    "male": "Macho",
+    "female": "Hembra"
+  },
+  "colors": {
+    "black": "Negro",
+    "white": "Blanco",
+    "gray": "Gris",
+    "red": "Rojo",
+    "blue": "Azul",
+    "brown": "Marrón",
+    "dark_brown": "Marrón Oscuro",
+    "blonde": "Rubio",
+    "green": "Verde",
+    "yellow": "Amarillo"
+  },
+  "sizes": {
+    "small": "Pequeño",
+    "medium": "Mediano",
+    "large": "Grande",
+    "none": "Ninguno",
+    "long": "largo",
+    "short": "Corto"
   }
 }

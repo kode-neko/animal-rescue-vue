@@ -1,87 +1,84 @@
 {
-  "title": "Animal Rescue",
   "pages": {
-    "home": "Home",
+    "master": "Home",
     "create": "Create",
-    "edit": "Edit"
+    "edit": "Edition"
   },
-  "fields": {
-    "name": "Nombre",
-    "sex": "Sexo",
-    "bday": "Birthday",
+  "noData": "No animals found...",
+  "credits": "Kodeneko @ 2022",
+  "msg": {
+    "errorGet": "It cannot be got the animal information. Try again later",
+    "errorList": "It cannot be got the animal list. Try again later",
+    "successPut": "Animal edited successfully",
+    "errorPut": "It cannot be edited the animal. Try again later",
+    "successPost": "Animal created successfully",
+    "errorPost": "It cannot be created the animal. Try again later",
+    "successDelete": "Animal deleted successfully",
+    "errorDelete": "It cannot be deleted the animal. Try again later"
+  },
+  "labels": {
+    "name": "Name",
+    "sex": "Sex",
+    "bday": "B-Day",
     "species": "Species",
     "breed": "Breed",
-    "color": "Color",
+    "colorFur": "Color",
     "eyes": "Eyes",
     "size": "Size",
     "sizeFur": "Fur",
-    "desc": "Description"
-  },
-  "placeholder": {
-    "search": "search..."
-  },
-  "btns": {
+    "desc": "Description",
+    "home": "Home",
     "create": "Create",
+    "cancel": "Cancel",
+    "accept": "Accept",
     "save": "Save",
     "edit": "Edit",
     "delete": "Delete",
-    "cancel": "Cancel",
-    "load-more": "Load More",
-    "theme": "Theme",
-    "lang": "Lang",
-    "home": "Home"
+    "loadmore": "Load more",
+    "all": "All"
   },
-  "lists" : {
-    "species": {
-      "cat": "Cat",
-      "dog": "Dog",
-      "cow": "Cow"
-    },
-    "sex": {
-      "male": "Male",
-      "female": "Female"
-    },
-    "colors": {
-      "black": "Black",
-      "white": "White",
-      "gray": "Gray",
-      "red": "Red",
-      "blue": "Blue",
-      "brown": "Brown",
-      "dark_brown": "Dark Brown",
-      "blonde": "Blonde",
-      "green": "Green",
-      "yellow": "Yellow"
-    },
-    "sizes": {
-      "small": "Small",
-      "medium": "Medium",
-      "large": "Large",
-      "none": "None",
-      "long": "Long",
-      "short": "Short"
-    }
+  "placeH": {
+    "search": "Search..."
   },
-  "alert": {
+  "form": {
+    "empty": "The field cannot be empty",
+    "max": "Only {{size}} max characters"
+  },
+  "modal": {
     "title": {
       "delete": "Delete {{species}}"
     },
     "body": {
-      "delete": "Do you want to the delete \"{{species}}\" named \"{{name}}\"?"
+      "delete": "Do you want to the delete the {{species}} named \"{{name}}\"?"
     }
   },
-  "msg": {
-    "succes": {
-      "animal-edit": "Animal edited successfully",
-      "animal-create": "Animal created successfully",
-      "animal-delete": "Animal deleted successfully"
-    },
-    "error": {
-      "animal-info": "The animal information cannot be getted. Try again later",
-      "animal-list": "The animal list cannot be getted. Try again later",
-      "animal-edit": "The animal cannot be edited. Try again later",
-      "animal-create": "The animal cannot be cerated. Try again later",
-      "animal-delete": "The animal cannot be deleted. Try again later"
-    }
+  "species": {
+    "cat": "Cat",
+    "dog": "Dog",
+    "cow": "Cow"
+  },
+  "sex": {
+    "male": "Male",
+    "female": "Female"
+  },
+  "colors": {
+    "black": "Black",
+    "white": "White",
+    "gray": "Gray",
+    "red": "Red",
+    "blue": "Blue",
+    "brown": "Brown",
+    "dark_brown": "Dark Brown",
+    "blonde": "Blonde",
+    "green": "Green",
+    "yellow": "Yellow"
+  },
+  "sizes": {
+    "small": "Small",
+    "medium": "Medium",
+    "large": "Large",
+    "none": "None",
+    "long": "Long",
+    "short": "Short"
   }
 }

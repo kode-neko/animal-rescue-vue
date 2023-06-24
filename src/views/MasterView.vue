@@ -16,30 +16,46 @@
         ></v-text-field>
       </v-col>
     </v-row>
-    <v-row 
-      class="d-flex flex-column my-10" 
-      :style="{gap: '42px'}"
-    >
-      <InfoCard
-        v-for="animal in animalList"
-        v-bind:key="animal.id"
-        :animal="animal"
-        @delete="handleDeleteBtn"
-      />
-    </v-row>
-    <v-row 
-      class="d-flex justify-center my-10" 
-    >
-      <v-btn 
-        @click="handleBtnMore"
-        color="primary"
-        class="ml-3"
-        size="large"
-        v-if="isVisibleBtnMore"
+    
+    <template v-if="animalList.length === 0">
+      <v-row class="my-16">
+        <v-col cols="12" class="d-flex justify-center">
+          <v-icon icon="mdi-panda" size="128"></v-icon>
+        </v-col>
+        <v-col cols="12" class="d-flex justify-center">
+          <p>{{ $t('noData') }}</p>
+        </v-col>
+      </v-row>
+    </template>
+    <template v-else>
+      <v-row 
+        class="d-flex flex-column my-10" 
+        :style="{gap: '42px'}"
       >
-        {{ $t('btns.load-more') }}
-      </v-btn>
-    </v-row>
+        <InfoCard
+          v-for="animal in animalList"
+          v-bind:key="animal.id"
+          :animal="animal"
+          @delete="handleDeleteBtn"
+        />
+      </v-row>
+      <v-row 
+        class="d-flex justify-center my-10" 
+      >
+        <v-btn 
+          @click="handleBtnMore"
+          color="primary"
+          class="ml-3"
+          size="large"
+          v-if="isVisibleBtnMore"
+        >
+          {{ $t('btns.load-more') }}
+        </v-btn>
+      </v-row>
+    </template>
+
+    <FooterItem />
+    
     <DeleteDialog
       :isOpen="isOpen"
       @close="isOpen = false"
@@ -51,6 +67,7 @@
 
 <script>
 import InfoCard from '../components/InfoCard.vue';
+import FooterItem from '../components/FooterItem.vue';
 import { notify } from "@kyvg/vue3-notification";
 import DeleteDialog from '../components/dialog/DeleteDialog.vue';
 import { deleteAnimal, getAnimalList } from '../api/animal';
@@ -58,7 +75,7 @@ import { mapWritableState } from 'pinia'
 import useAppStore from '../stores/app';
 
 export default {
-  components: { InfoCard, DeleteDialog },
+  components: { InfoCard, DeleteDialog, FooterItem },
   data() {
     const appStore = useAppStore();
     return {
@@ -125,6 +142,17 @@ export default {
           })
         ))
         .finally(() => this.animalDelete.value = false);
+    },
+    watch: {
+      animalList(value) {
+        this.animalList = value;
+      },
+      isVisibleBtnMore(value) {
+        this.isVisibleBtnMore = value;
+      },
+      isOpen(value) {
+        this.isOpen = value;
+      }
     }
   },
 }
