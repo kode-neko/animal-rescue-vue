@@ -72,7 +72,6 @@ export default {
   width: 992px;
   margin: 0 auto;
   margin-top: 60px;
-  padding: 0 24px;
 }
 
 </style>

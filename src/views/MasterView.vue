@@ -1,22 +1,20 @@
 <template>
-  <v-container>
-    <v-row justify="end">
-      <v-col xs="12" md="4" class="px-0">
+  <v-container class="p-0 m-0">
+    <v-row justify="end" >
+      <v-col xs="12" md="7" class="d-flex align-center">
         <v-text-field
           :loading="loading"
           density="compact"
           variant="solo"
-          :label="$t('placeholder.search')"
-          append-inner-icon="mdi-magnify"
-          single-line
+          :placeholder="$t('placeH.search')"
           hide-details
           v-model="searchStr"
-          v-on:keyup.enter="handleSearch"
-          v-on:blur="handleSearch"
+          v-on:keyup.enter="handleSearch(searchStr, [])"
         ></v-text-field>
+        <v-btn class="ml-2 bg-purple" @click="handleSearch(searchStr, [])" size="large"><v-icon icon="mdi-magnify"></v-icon></v-btn>
+        <v-btn class="ml-2" color="purple" @click="handleSearch('', [])" size="large" variant="outlined">{{ $t('labels.all') }}</v-btn>
       </v-col>
     </v-row>
-    
     <template v-if="animalList.length === 0">
       <v-row class="my-16">
         <v-col cols="12" class="d-flex justify-center">
@@ -90,17 +88,16 @@ export default {
     };
   },
   mounted() {
-    this.searchAnimals(this.offset, this.searchStr, this.limit)
+    this.searchAnimals(this.offset, this.searchStr, this.limit, [])
   },
   methods: {
-    searchAnimals(offset, searchStr, limit) {
+    searchAnimals(offset, searchStr, limit, prevList) {
       this.animalGetList.value = true;
       getAnimalList(offset, searchStr, limit)
         .then(list => {
-          if(list.length === 0)
+          if(list.length < limit)
             this.isVisibleBtnMore = false;
-          else
-            this.animalList = [...this.animalList, ...list]
+          this.animalList = [...list, ...prevList]
         })
         .catch(() => (
           notify({
@@ -110,17 +107,20 @@ export default {
         ))
         .finally(() => this.animalGetList.value = false);
     },
-    handleSearch() {
-      if(this.prevSearchStr !== this.searchStr) {
+    hancleClickAll() {
+      this.handleSearch('', []);
+    },
+    handleSearch(term, prevList) {
+      if(this.prevSearchStr !== term) {
         this.offset = 0;
-        this.prevSearchStr = this.searchStr;
-        this.searchAnimals(0, this.searchStr, this.limit);
+        this.prevSearchStr = term;
+        this.searchAnimals(0, term, this.limit, prevList);
       }
     },
     handleBtnMore() {
       const newOffset = this.offset + this.limit;
       this.offset = newOffset;
-      this.searchAnimals(newOffset, this.searchStr, this.limit);
+      this.searchAnimals(newOffset, this.searchStr, this.limit, this.animalList);
     },
     handleDeleteBtn() {
       this.isOpen = true
@@ -144,14 +144,14 @@ export default {
         .finally(() => this.animalDelete.value = false);
     },
     watch: {
-      animalList(value) {
-        this.animalList = value;
+      animalList(val) {
+        this.animalList = val;
       },
-      isVisibleBtnMore(value) {
-        this.isVisibleBtnMore = value;
+      isVisibleBtnMore(val) {
+        this.isVisibleBtnMore = val;
       },
-      isOpen(value) {
-        this.isOpen = value;
+      isOpen(val) {
+        this.isOpen = val;
       }
     }
   },
