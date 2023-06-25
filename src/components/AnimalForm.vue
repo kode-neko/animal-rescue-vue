@@ -5,7 +5,7 @@
       <v-col cols="12">
         <v-text-field
           v-model="animalForm.name"
-          :label="$t('fields.name')"
+          :label="$t('labels.name')"
           required
           @update:modelValue="$event => checkField('name')"
           :error-messages="hintForm.name"
@@ -17,12 +17,12 @@
       <v-col cols="6">
         <v-radio-group v-model="animalForm.sex">
           <template v-slot:label>
-            <div>{{ $t('fields.sex') }}</div>
+            <div>{{ $t('labels.sex') }}</div>
           </template>
           <v-radio 
             v-for="sex in Sex" 
             :key="sex" 
-            :label="$t(`lists.sex.${sex}`)" 
+            :label="$t(`sex.${sex}`)" 
             :value="sex"
           >
         </v-radio>
@@ -31,12 +31,12 @@
       <v-col cols="6">
         <v-radio-group v-model="animalForm.species">
           <template v-slot:label>
-            <div>{{ $t('fields.species') }}</div>
+            <div>{{ $t('species') }}</div>
           </template>
           <v-radio 
             v-for="species in Species" 
             :key="species" 
-            :label="$t(`lists.species.${species}`)" 
+            :label="$t(`species.${species}`)" 
             :value="species"
           ></v-radio>
         </v-radio-group>
@@ -47,7 +47,7 @@
       <v-col cols="12">
         <v-text-field
           v-model="animalForm.breed"
-          :label="$t('fields.breed')"
+          :label="$t('labels.breed')"
           required
         ></v-text-field>
       </v-col>
@@ -63,7 +63,7 @@
           :items="colorFurList"
           item-title="title"
           item-value="value"
-          :label="$t('fields.colorFur')"
+          :label="$t('label.colorFur')"
           persistent-hint
           return-object
           single-line
@@ -75,7 +75,7 @@
           :items="colorEyesList"
           item-title="title"
           item-value="value"
-          :label="$t('fields.eyes')"
+          :label="$t('label.eyes')"
           persistent-hint
           return-object
           single-line
@@ -87,7 +87,7 @@
           :items="sizeList"
           item-title="title"
           item-value="value"
-          :label="$t('fields.size')"
+          :label="$t('label.size')"
           persistent-hint
           return-object
           single-line
@@ -126,7 +126,7 @@
           size="large"
           @click="handleSubmit"
         >
-        {{ $t('btns.save') }}
+        {{ $t('labels.save') }}
         </v-btn>
       </v-col>
     </v-row>
@@ -145,8 +145,6 @@ import {
 } from '../constants';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
-import { useVuelidate } from '@vuelidate/core';
-import { required, minLength, maxLength } from '@vuelidate/validators';
 import {t} from 'i18next';
 
 // Validators
@@ -193,7 +191,7 @@ export default {
       this.animalForm = this.parseAnimal(val);
     }
   },
-  setup: () => ({ v$: useVuelidate() }),
+
   methods: {
     parseAnimal(animal) {
       const colorFurSelected = colorFurList.find(val => val.value === animal.color);
@@ -208,72 +206,17 @@ export default {
         sizeFur: sizeFurSelected,
       }
     },
-    async handleSubmi$t() {
-      const isFormCorrect = await this.v$.$validate()
-      if(isFormCorrect) {
-        const animalFilled = {
-          ...this.animalForm,
-          color: this.animalForm.color.value,
-          eyes: this.animalForm.eyes.value,
-          size: this.animalForm.size.value,
-          sizeFur: this.animalForm.sizeFur.value,
-        }
-        $this.emits('save', animalFilled)
+    handleSubmi$t() {
+      const animalFilled = {
+        ...this.animalForm,
+        color: this.animalForm.color.value,
+        eyes: this.animalForm.eyes.value,
+        size: this.animalForm.size.value,
+        sizeFur: this.animalForm.sizeFur.value,
       }
-    },
-    async checkField(attr) {
-      await this.v$.$validate()
-      if(this.v$.animal[attr].$touch && this.v$.animal[attr].$errors.length > 0 )
-        this.hintForm.name = this.v$.animal[attr].$errors[0].$message
-      else
-      this.hintForm.name = ''
+      this.emits('save', animalFilled)
     }
-  },
-  validations: {
-    animal: {
-      name: {
-        required,
-        maxLength: maxLength(30)
-      },
-      bday: {
-        required,
-      },
-      sex: {
-        required,
-        sexValidator
-      },
-      desc:{
-        required,
-        minLength: minLength(30),
-        maxLength: maxLength(500)
-      },
-      breed: {
-        required,
-        maxLength: maxLength(50)
-      },
-      color: {
-        required,
-        colorFurValidator,
-      },
-      eyes: {
-        required,
-        colorEyesValidator,
-      },
-      species: {
-        required,
-        speciesValidator
-      },
-      size: {
-        required,
-        sizeValidator,
-      },
-      sizeFur: {
-        required,
-        sizeFurValidator
-      },
-    },
-  },
-  
+  }
 }
 </script>
 

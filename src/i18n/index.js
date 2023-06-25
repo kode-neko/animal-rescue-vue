@@ -6,7 +6,7 @@ import en from './en.json';
 i18next
   .use(LanguageDetector)
   .init({
-    debug: true,
+    debug: false,
     fallbackLng: 'en',
     resources: {
       en: { translation: en },

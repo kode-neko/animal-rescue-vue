@@ -1,7 +1,7 @@
 <template>
   <HeaderSubpage
     :title="$t('pages.create')"
-    :breadcrumbs="[{name: $t('pages.home'), link: '/'}, {name: $t('pages.create')}]"
+    :breadcrumbs="[{name: $t('pages.master'), link: '/'}, {name: $t('pages.create')}]"
   >
     <AnimalForm 
       :animal="animal" 
@@ -20,10 +20,12 @@ import {
   SizeFur
 } from '../constants';
 import HeaderSubpage from '../components/HeaderSubpage.vue';
+import { notify } from "@kyvg/vue3-notification";
 import AnimalForm from '../components/AnimalForm.vue';
 import { useRouter } from 'vue-router';
 import { mapWritableState } from 'pinia'
 import useAppStore from '../stores/app';
+import { postAnimal } from '../api/animal';
 
 export default {
   components: {HeaderSubpage, AnimalForm},
@@ -50,18 +52,12 @@ export default {
       this.animalPost.value = true;
       postAnimal(animal)
         .then(() => {
-          notify({
-            title: "noti.save-title-success",
-            text: "noti.save-body-success",
-          });
+          notify({title: "msg.successPost"});
           const router = useRouter();
           router.push('/');
         })
         .catch(() => {
-          notify({
-            title: "noti.save-title-error",
-            text: "noti.save-body-error",
-          });
+          notify({title: "msg.errorPost"});
         })
         .finally(() => this.animalPost.value = false)
     }
