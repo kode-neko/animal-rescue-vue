@@ -1,7 +1,7 @@
 <template>
   <HeaderSubpage
     :title="$t('pages.edit')"
-    :breadcrumbs="[{name: $t('pages.home'), link: '/'}, {name: $t('pages.edit')}]"
+    :breadcrumbs="[{name: $t('pages.master'), link: '/'}, {name: $t('pages.edit')}]"
   >
     <AnimalForm 
       :animal="animal" 
@@ -25,11 +25,12 @@ import {useRoute} from 'vue-router';
 import { mapWritableState } from 'pinia'
 import useAppStore from '../stores/app';
 import { getAnimal } from '../api/animal';
+import { notify } from "@kyvg/vue3-notification";
+import { putAnimal } from '../api/animal';
 
 export default {
   components: { HeaderSubpage, AnimalForm },
   data() {
-    const appStore = useAppStore();
     return {
       animal: {
         name: '',
@@ -43,41 +44,32 @@ export default {
         size: Size.LARGE,
         sizeFur: SizeFur.LARGE
       },
-      ...mapWritableState(appStore, ['animalGet', 'animalPut'])
+      ...mapWritableState(useAppStore, ['animalGet', 'animalPut'])
     }
   },
   mounted() {
     const route = useRoute();
-    this.animalGet.value = true;
+    this.animalGet = true;
     getAnimal(route.params.id)
       .then((animal) => this.animal = animal)
       .catch(() => {
-        notify({
-          title: "noti.getid-title-error",
-          text: "noti.getid-body-error",
-        });
-        const router = useRouter();
-        router.push('/');
+        notify({ title: this.$t("msg.errorGet") });
+        this.$router.push('/');
       })
-      .finally(() => this.animalGet.value = false);
+      .finally(() => this.animalGet = false);
   },
   methods: {
     handleSave(animal) {
-      this.animalPut.value = true;
-      postAnimal(animal)
+      this.animalPut = true;
+      putAnimal(animal)
         .then(() => {
-          notify({
-            title: "noti.save-title-success",
-            text: "noti.save-body-success",
-          });
+          notify({ title: this.$t("msg.successPut") });
+          this.$router.push('/');
         })
         .catch(() => {
-          notify({
-            title: "noti.save-title-error",
-            text: "noti.save-body-error",
-          });
+          notify({title:this.$t("msg.errorPut")});
         })
-        .finally(() => this.animalPut.value = true);
+        .finally(() => this.animalPut = true);
     }
   }
 }
