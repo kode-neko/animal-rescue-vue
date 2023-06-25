@@ -17,7 +17,7 @@ function getAnimalList(offset, search, limit) {
 }
 
 function postAnimal(animal) {
-  return fetch(`${urlApi}/animal`, {
+  return fetch(`${urlApi}animal`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ function postAnimal(animal) {
 }
 
 function putAnimal(animal) {
-  return fetch(`${urlApi}/animal`, {
+  return fetch(`${urlApi}animal`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ function putAnimal(animal) {
 }
 
 function deleteAnimal(id) {
-  return fetch(`${urlApi}/animal/${id}`, { method: 'DELETE' })
+  return fetch(`${urlApi}animal/${id}`, { method: 'DELETE' })
     .then((raw) => raw.json());
 }
 

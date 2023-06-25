@@ -1,29 +1,32 @@
 <template>
   <v-dialog
     v-model="isOpenData"
+    :close-on-back="false"
+    :close-on-content-click="false"
+    :persistent="true"
     transition="dialog-top-transition"
     width="auto"
   >
     <v-card>
       <v-toolbar
         color="primary"
-        title="dialog.delete-title"
+        :title="$t('modal.title.delete', {species: animalData.species})"
       ></v-toolbar>
       <v-card-text>
-        <div class="pa-12">dialog.delete-body</div>
+        <div class="pa-12">{{ $t('modal.body.delete', {species: animalData.species, name: animalData.name}) }}</div>
       </v-card-text>
       <v-card-actions class="justify-end">
         <v-btn
           variant="text"
-          @click="handleDelete(isActive)"
+          @click="handleDelete"
         >
-          delete
+          {{ $t('labels.delete') }}
         </v-btn>
         <v-btn
           variant="text"
-          @click="isActive.value = false"
+          @click="handleCancel"
         >
-          close
+          {{ $t('labels.cancel') }}
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -33,34 +36,32 @@
 <script>
 export default {
   props: {
-    isOpen: Boolean
+    isOpen: Boolean,
+    animal: Object
   },
   data() {
     return {
-      isOpenData: this.isOpen
+      isOpenData: this.isOpen,
+      animalData: this.animal
     }
   },
   watch: {
     isOpen(val) {
-      console.log('isOpen', val);
       this.isOpenData = val;
     },
-    isOpenData(val) {
-      console.log('isOpenData', val);
+    animal(val) {
+      this.animalData = val;
     }
   },
   methods: {
-    handleClose() {
-      this.$emit('close');
-    },
     handleDelete() {
-      this.$emit('delete');
+      this.$emit('delete', this.animal);
     },
     handleCancel() {
       this.$emit('cancel');
     }
   },
-  emits: ['close', 'delete', 'cancel']
+  emits: ['delete', 'cancel']
 }
 </script>
 

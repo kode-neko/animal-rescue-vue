@@ -35,6 +35,7 @@
           v-bind:key="animal.id"
           :animal="animal"
           @delete="handleDeleteBtn"
+          @edit="handleEditBtn"
         />
       </v-row>
       <v-row 
@@ -55,6 +56,7 @@
     <FooterItem />
     
     <DeleteDialog
+      :animal="animaldelete"
       :isOpen="isOpen"
       @close="isOpen = false"
       @delete="handleDelete"
@@ -69,7 +71,7 @@ import FooterItem from '../components/FooterItem.vue';
 import { notify } from "@kyvg/vue3-notification";
 import DeleteDialog from '../components/dialog/DeleteDialog.vue';
 import { deleteAnimal, getAnimalList } from '../api/animal';
-import { mapActions, mapWritableState } from 'pinia'
+import { mapWritableState } from 'pinia'
 import useAppStore from '../stores/app';
 
 export default {
@@ -77,6 +79,7 @@ export default {
   data() {
     return {
       animalList: [],
+      animaldelete: undefined,
       searchStr: '',
       prevSearchStr: '',
       offset: 0,
@@ -108,54 +111,43 @@ export default {
         ))
         .finally(() => this.animalGetList = false);
     },
-    hancleClickAll() {
-      this.handleSearch('', []);
-    },
     handleSearch(term, prevList) {
       if(this.prevSearchStr !== term) {
-        this.offset = 0;
         this.prevSearchStr = term;
         this.searchAnimals(0, term, this.limit, prevList);
       }
+    },
+    hancleClickAll() {
+      this.searchAnimals(0, '', this.limit, []);
     },
     handleBtnMore() {
       const newOffset = this.offset + this.limit;
       this.offset = newOffset;
       this.searchAnimals(newOffset, this.searchStr, this.limit, this.animalList);
     },
-    handleDeleteBtn() {
+    handleDeleteBtn(animal) {
+      this.animaldelete = animal
       this.isOpen = true
+    },
+    handleEditBtn(animal) {
+      this.$router.push(`/edit/${animal.id}`)
     },
     handleDelete(animal) {
       this.isOpen = false
-      this.animalDelete.value = true;
       deleteAnimal(animal.id)
-        .then(list => (
-          notify({
-            title: "noti.master.error-delete-title",
-            text: "noti.master.error-delete-body",
-          })
-        ))
-        .catch(() => (
-          notify({
-            title: "noti.master.error-delete-title",
-            text: "noti.master.error-delete-body",
-          })
-        ))
-        .finally(() => this.animalDelete.value = false);
+        .then(() => {
+          this.searchStr = ''
+          this.searchAnimals(0, '', this.limit, []);
+          notify({ title: "msg.successDelete" })
+        })
+        .catch(() => notify({ title: "msg.errorDelete" }))
+        .finally(() => this.animalDelete = true);
     },
+
     watch: {
-      animalList(val) {
-        this.animalList = val;
-      },
-      isVisibleBtnMore(val) {
-        this.isVisibleBtnMore = val;
-      },
-      isOpen(val) {
-        this.isOpen = val;
-      },
       searchStr(val) {
-        this.prevSearchStr = val;
+        this.offset = 0;
+        this.isVisibleBtnMore = true;
         this.searchStr = val;
       }
     }

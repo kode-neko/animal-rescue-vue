@@ -46,23 +46,22 @@
         color="amber"
         class="ml-3"
       >
-        {{ $t(`btns.delete`) }}
+        {{ $t("labels.delete") }}
       </v-btn>
       <v-btn 
-        @click="$router.push(`/edit/${animal.id}`)"
+        @click="$emit('edit', animal)"
         variant="outlined"
         prepend-icon="mdi-pencil"
         color="amber"
         class="ml-3"
       >
-        {{ $t(`btns.edit`) }}
+        {{ $t("labels.edit") }}
       </v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-import { attrAnimalCol01, attrAnimalCol02 } from '../constants.js';
 import DeleteDialog from './dialog/DeleteDialog.vue';
 import * as dayjs from 'dayjs'
 
@@ -99,7 +98,7 @@ export default {
       return dayjs(bday).format('DD/MM/YYYY');
     }
   },
-  emits: ['delete']
+  emits: ['delete', 'edit']
 }
 </script>
 
