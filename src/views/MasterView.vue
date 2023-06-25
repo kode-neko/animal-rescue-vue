@@ -134,6 +134,7 @@ export default {
     },
     handleDelete(animal) {
       this.isOpen = false
+      this.animalDelete = true
       deleteAnimal(animal.id)
         .then(() => {
           this.searchStr = ''
@@ -141,7 +142,7 @@ export default {
           notify({ title: "msg.successDelete" })
         })
         .catch(() => notify({ title: "msg.errorDelete" }))
-        .finally(() => this.animalDelete = true);
+        .finally(() => this.animalDelete = false);
     },
 
     watch: {
