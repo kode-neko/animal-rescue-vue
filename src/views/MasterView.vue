@@ -104,10 +104,7 @@ export default {
           this.animalList = [...list, ...prevList]
         })
         .catch(() => (
-          notify({
-            title: "noti.master.error-list-title",
-            text: "noti.master.error-list-body",
-          })
+          notify({title: this.$t("msg.master.errorList")})
         ))
         .finally(() => this.animalGetList = false);
     },
@@ -139,9 +136,9 @@ export default {
         .then(() => {
           this.searchStr = ''
           this.searchAnimals(0, '', this.limit, []);
-          notify({ title: "msg.successDelete" })
+          notify({ title: this.$t("msg.successDelete") })
         })
-        .catch(() => notify({ title: "msg.errorDelete" }))
+        .catch(() => notify({ title: this.$t("msg.errorDelete") }))
         .finally(() => this.animalDelete = false);
     },
 

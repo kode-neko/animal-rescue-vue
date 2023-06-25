@@ -20,7 +20,7 @@
       <router-view></router-view>
     </v-main>
     <v-overlay
-      :model-value="animalGetList || animalPut || animalDelete"
+      :model-value="animalGetList || animalPut || animalDelete || animalPost"
       class="align-center justify-center"
     >
       <v-progress-circular
@@ -49,7 +49,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(useAppStore, ['animalGetList', 'animalPut', 'animalDelete'])
+    ...mapState(useAppStore, ['animalGetList', 'animalPut', 'animalDelete', 'animalPost'])
   },
   methods: {
     handleClickMenu() {

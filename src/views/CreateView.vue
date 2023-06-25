@@ -22,7 +22,6 @@ import {
 import HeaderSubpage from '../components/HeaderSubpage.vue';
 import { notify } from "@kyvg/vue3-notification";
 import AnimalForm from '../components/AnimalForm.vue';
-import { useRouter } from 'vue-router';
 import { mapWritableState } from 'pinia'
 import useAppStore from '../stores/app';
 import { postAnimal } from '../api/animal';
@@ -30,7 +29,6 @@ import { postAnimal } from '../api/animal';
 export default {
   components: {HeaderSubpage, AnimalForm},
   data() {
-    const appStore = useAppStore();
     return {
       animal: {
         name: '',
@@ -44,22 +42,21 @@ export default {
         size: Size.LARGE,
         sizeFur: SizeFur.LARGE
       },
-      ...mapWritableState(appStore, ['animalPost'])
+      ...mapWritableState(useAppStore, ['animalPost'])
     }
   },
   methods: {
     handleSave(animal) {
-      this.animalPost.value = true;
+      this.animalPost = true;
       postAnimal(animal)
         .then(() => {
-          notify({title: "msg.successPost"});
-          const router = useRouter();
-          router.push('/');
+          notify({ title: this.$t("msg.successPost") });
+          this.$router.push('/')
         })
         .catch(() => {
-          notify({title: "msg.errorPost"});
+          notify({title: this.$t("msg.errorPost")});
         })
-        .finally(() => this.animalPost.value = false)
+        .finally(() => this.animalPost = false)
     }
   }
 }

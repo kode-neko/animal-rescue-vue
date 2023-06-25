@@ -29,7 +29,7 @@
       <v-col cols="6">
         <v-radio-group v-model="animalForm.species">
           <template v-slot:label>
-            <div>{{ $t('species') }}</div>
+            <div>{{ $t('labels.species') }}</div>
           </template>
           <v-radio 
             v-for="species in Species" 
@@ -59,9 +59,7 @@
         <v-select
           v-model="animalForm.color"
           :items="colorFurList"
-          item-title="title"
-          item-value="value"
-          :label="$t('label.colorFur')"
+          :label="$t('labels.colorFur')"
           persistent-hint
           return-object
           single-line
@@ -71,9 +69,7 @@
         <v-select
           v-model="animalForm.eyes"
           :items="colorEyesList"
-          item-title="title"
-          item-value="value"
-          :label="$t('label.eyes')"
+          :label="$t('labels.eyes')"
           persistent-hint
           return-object
           single-line
@@ -83,9 +79,7 @@
         <v-select
           v-model="animalForm.size"
           :items="sizeList"
-          item-title="title"
-          item-value="value"
-          :label="$t('label.size')"
+          :label="$t('labels.size')"
           persistent-hint
           return-object
           single-line
@@ -95,9 +89,7 @@
         <v-select
           v-model="animalForm.sizeFur"
           :items="sizeFurList"
-          item-title="title"
-          item-value="value"
-          :label="$t('fields.sizeFur')"
+          :label="$t('labels.sizeFur')"
           persistent-hint
           return-object
           single-line
@@ -109,7 +101,7 @@
       <v-col cols="12">
         <v-textarea
           variant="filled"
-          :label="$t('fields.desc')"
+          :label="$t('labels.desc')"
           v-model="animalForm.desc"
         ></v-textarea>
       </v-col>
@@ -141,13 +133,11 @@ import {
 } from '../constants';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
-import { t } from 'i18next';
 
-// List Selectors
-const colorFurList = Object.values(ColorFur).map(val => ({ title: t(`lists.colors.${val}`) , value: val }))
-const colorEyesList = Object.values(ColorEyes).map(val => ({ title: t(`lists.colors.${val}`) , value: val }))
-const sizeList = Object.values(Size).map(val => ({ title: t(`lists.sizes.${val}`) , value: val }))
-const sizeFurList = Object.values(SizeFur).map(val => ({ title: t(`lists.sizes.${val}`) , value: val }))
+let colorFurList = [];
+let colorEyesList = [];
+let sizeList = [];
+let sizeFurList = [];
 
 export default {
   components: {VueDatePicker},
@@ -156,6 +146,11 @@ export default {
   },
   emits: ['save'],
   data() {
+    // List Selectors
+    colorFurList = Object.values(ColorFur).map(val => ({ title: this.$t(`colors.${val}`) , value: val }))
+    colorEyesList = Object.values(ColorEyes).map(val => ({ title: this.$t(`colors.${val}`) , value: val }))
+    sizeList = Object.values(Size).map(val => ({ title: this.$t(`sizes.${val}`) , value: val }))
+    sizeFurList = Object.values(SizeFur).map(val => ({ title: this.$t(`sizes.${val}`) , value: val }))
     return {
       Species,
       Sex,
@@ -186,7 +181,7 @@ export default {
         sizeFur: sizeFurSelected,
       }
     },
-    handleSubmi$t() {
+    handleSubmit() {
       const animalFilled = {
         ...this.animalForm,
         color: this.animalForm.color.value,
@@ -194,7 +189,7 @@ export default {
         size: this.animalForm.size.value,
         sizeFur: this.animalForm.sizeFur.value,
       }
-      this.emits('save', animalFilled)
+      this.$emit('save', animalFilled)
     }
   }
 }
