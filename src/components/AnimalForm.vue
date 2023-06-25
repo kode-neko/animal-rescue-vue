@@ -7,8 +7,6 @@
           v-model="animalForm.name"
           :label="$t('labels.name')"
           required
-          @update:modelValue="$event => checkField('name')"
-          :error-messages="hintForm.name"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -113,8 +111,6 @@
           variant="filled"
           :label="$t('fields.desc')"
           v-model="animalForm.desc"
-          @update:modelValue="$event => checkField('desc')"
-          :error-messages="hintForm.desc"
         ></v-textarea>
       </v-col>
     </v-row>
@@ -145,15 +141,7 @@ import {
 } from '../constants';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
-import {t} from 'i18next';
-
-// Validators
-const speciesValidator = (value) => Object.values(Species).includes(value);
-const sexValidator = (value) => Object.values(Sex).includes(value);
-const colorFurValidator = (value) => Object.values(ColorFur).includes(value);
-const colorEyesValidator = (value) => Object.values(ColorEyes).includes(value);
-const sizeValidator = (value) => Object.values(Size).includes(value);
-const sizeFurValidator = (value) => Object.values(SizeFur).includes(value);
+import { t } from 'i18next';
 
 // List Selectors
 const colorFurList = Object.values(ColorFur).map(val => ({ title: t(`lists.colors.${val}`) , value: val }))
@@ -171,19 +159,11 @@ export default {
     return {
       Species,
       Sex,
-
       colorFurList,
       colorEyesList,
       sizeList,
       sizeFurList,
-
-      animalForm: this.parseAnimal(this.animal),
-      formValid: this.v$.animal,
-
-      hintForm: {
-        name: undefined,
-        desc: undefined
-      }
+      animalForm: this.parseAnimal(this.animal)
     }
   },
   watch: {
