@@ -51,7 +51,7 @@
           size="large"
           v-if="isVisibleBtnMore"
         >
-          {{ $t('btns.load-more') }}
+          {{ $t('labels.loadmore') }}
         </v-btn>
       </v-row>
     </template>

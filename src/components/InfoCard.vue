@@ -62,26 +62,24 @@
 </template>
 
 <script>
-import DeleteDialog from './dialog/DeleteDialog.vue';
 import * as dayjs from 'dayjs'
 
 export default {
-  components: {DeleteDialog},
   props: {
     animal: Object,
   },
   data() {
     const {bday, species, breed, color, eyes, size, sizeFur} = this.animal;
     const col01 = [
-      {label: 'fields.bday', value: this.formatDate(bday)},
-      {label: 'fields.species', value: `lists.species.${species}`},
-      {label: 'fields.breed', value: breed},
-      {label: 'fields.color', value: `lists.colors.${color}`},
+      {label: 'labels.bday', value: this.formatDate(bday)},
+      {label: 'labels.species', value: `species.${species}`},
+      {label: 'labels.breed', value: breed},
+      {label: 'labels.color', value: `colors.${color}`},
     ];
     const col02 = [
-      {label: 'fields.eyes', value: `lists.colors.${eyes}`},
-      {label: 'fields.size', value: `lists.sizes.${size}`},
-      {label: 'fields.sizeFur', value: `lists.sizes.${sizeFur}`},
+      {label: 'labels.eyes', value: `colors.${eyes}`},
+      {label: 'labels.size', value: `sizes.${size}`},
+      {label: 'labels.sizeFur', value: `sizes.${sizeFur}`},
     ];
     const imgUrl = new URL(`../assets/cat.png`, import.meta.url).href;
     return {
