@@ -4,8 +4,10 @@ export default {
 </script>
 
 <template>
-  <router-view></router-view>
-  <notifications />
+  <v-theme-provider root>
+    <router-view></router-view>
+    <notifications />
+  </v-theme-provider>
 </template>
 
 <style>

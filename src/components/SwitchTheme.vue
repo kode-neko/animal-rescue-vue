@@ -6,7 +6,7 @@
       class="sw"
     ></v-switch>
     <v-icon icon="mdi-weather-night" v-if="themeVal"></v-icon>
-    <v-icon icon="mdi-weather-sunny" v-if="!themeVal"></v-icon>
+    <v-icon icon="mdi-weather-sunny" v-else></v-icon>
   </div>
 </template>
 
@@ -28,10 +28,10 @@ export default {
   watch: {
     themeVal(value) {
       this.themeVal = value;
-      this.$emit('changeSw', this.themeVal ? 'dark' : 'light')
+      this.$emit('changeSW', this.themeVal ? 'dark' : 'light')
     }
   },
-  emit: ['change']
+  emit: ['changeSW']
 }
 </script>
 

@@ -11,7 +11,7 @@ import colors from 'vuetify/lib/util/colors'
 
 const vuetify = createVuetify({
   theme: {
-    defaultTheme: 'dark',
+    dark: 'dark',
     themes: {
       dark: {
         dark: false,

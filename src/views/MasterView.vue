@@ -28,15 +28,18 @@
     <template v-else>
       <v-row 
         class="d-flex flex-column my-10" 
-        :style="{gap: '42px'}"
       >
-        <InfoCard
-          v-for="animal in animalList"
-          v-bind:key="animal.id"
+        <v-col 
+          v-for="animal in animalList" 
+          v-bind:key="animal.id" 
+          class="my-3"
+        >
+          <InfoCard
           :animal="animal"
           @delete="handleDeleteBtn"
           @edit="handleEditBtn"
         />
+        </v-col>
       </v-row>
       <v-row 
         class="d-flex justify-center my-10" 
